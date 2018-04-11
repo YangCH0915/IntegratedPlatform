@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinruiyun.platform.dao.SubProductDao">
+    <insert id="addSubProduct">
+        insert into sub_product
+            (title,product_id,sub_product_id,price,original_price,billing_code,is_show,ranking,product_explain)
+           values
+            (#{sp.title},#{sp.productId},#{sp.subProductId},#{sp.price},#{sp.originalPrice},
+          #{sp.billingCode},#{sp.isShow},#{sp.ranking},#{sp.productExplain})
+    </insert>
+    <delete id="deleteSubProduct">
+        delete from sub_product where sub_product_id=#{subProductId}
+    </delete>
+    <update id="updateSubProduct">
+        update sub_product set
+          title=#{sp.title},
+          product_id=#{sp.productId},
+          sub_product_id=#{sp.subProductId},
+          price=#{sp.price},
+          original_price=#{sp.originalPrice},
+          billing_code=#{sp.billingCode},
+          is_show=#{sp.isShow},
+          ranking=#{sp.ranking},
+          product_explain=#{sp.productExplain}
+           where
+          id = #{sp.id}
+    </update>
+    <select id="querySubProduct" resultType="com.xinruiyun.platform.entity.SubProduct">
+        select * from sub_product where sub_product_id=#{subProductId}
+    </select>
+    <select id="querySubProductList" resultType="com.xinruiyun.platform.entity.SubProduct">
+        select * from sub_product
+    </select>
+
+    <select id="querySubProductListByProductId" resultType="com.xinruiyun.platform.entity.SubProduct">
+        select * from sub_product where product_id=#{productId}
+    </select>
+</mapper>

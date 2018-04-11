@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinruiyun.platform.dao.ProductDao">
+    <insert id="addProduct">
+        insert into product
+            (product_id,
+            product_name,
+            product_logo,
+            product_bg,
+            product_explain,
+            is_enable)
+        values
+            (#{p.productId},#{p.productName},#{p.productLogo},
+            #{p.productBg},#{p.productExplain},#{p.isEnable})
+    </insert>
+
+    <delete id="deleteProduct">
+        delete from product where product_id=#{productId}
+    </delete>
+
+    <update id="updateProduct">
+        update product set
+            product_id=#{p.productId},
+            product_name=#{p.productName},
+            product_logo=#{p.productLogo},
+            product_bg=#{p.productBg},
+            product_explain=#{p.productExplain},
+            is_enable=#{p.isEnable}
+            where id = #{p.id}
+    </update>
+
+    <select id="queryProductList" resultType="com.xinruiyun.platform.entity.Product">
+        select * from product
+    </select>
+
+    <select id="queryProductAndSubProduct" resultMap="productAndSubProduct">
+        select * from
+        product p inner join sub_product sp on p.product_id=sp.product_id
+             where
+        p.product_id=#{productId}
+    </select>
+
+   <resultMap id="subProductList" type="com.xinruiyun.platform.entity.SubProduct">
+       <result property="id" column="id" />
+       <result property="title" column="title" />
+       <result property="productId" column="product_id" />
+       <result property="subProductId" column="sub_product_id" />
+       <result property="price" column="price" />
+       <result property="originalPrice" column="original_price" />
+       <result property="billingCode" column="billing_code" />
+       <result property="isShow" column="is_show" />
+       <result property="ranking" column="ranking" />
+       <result property="productExplain" column="product_explain" />
+   </resultMap>
+
+    <resultMap id="productAndSubProduct" type="com.xinruiyun.platform.entity.Product">
+        <result property="id" column="id" />
+        <result property="productId" column="product_id" />
+        <result property="productName" column="product_name" />
+        <result property="productLogo" column="product_logo" />
+        <result property="productBg" column="product_bg" />
+        <result property="isEnable" column="is_enable" />
+        <result property="productExplain" column="product_explain" />
+        <collection property="subProducts" resultMap="subProductList"/>
+    </resultMap>
+
+</mapper>
