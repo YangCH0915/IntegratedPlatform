@@ -1,11 +1,13 @@
 package com.xinruiyun.platform.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 产品分类
  */
-public class Product {
+public class Product implements Serializable{
+
     /**
      * 主键ID
      */

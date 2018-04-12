@@ -1,6 +1,7 @@
 package com.xinruiyun.platform.service.product.impl;
 
 import com.xinruiyun.platform.dao.ProductDao;
+import com.xinruiyun.platform.dao.cache.RedisDao;
 import com.xinruiyun.platform.entity.Product;
 import com.xinruiyun.platform.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

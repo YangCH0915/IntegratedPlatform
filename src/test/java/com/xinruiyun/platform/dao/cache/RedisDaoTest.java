@@ -4,7 +4,9 @@ import com.xinruiyun.platform.BaseTest;
 import com.xinruiyun.platform.entity.Product;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,11 @@ import static org.junit.Assert.*;
 
 public class RedisDaoTest extends BaseTest{
 
-    private RedisDao redisDao = new RedisDao();
+//    @Resource(name = "redisTemplate")
+//    public RedisTemplate redisTemplate;
+
+    @Autowired
+    RedisDao redisDao;
 
     @Test
     public void setObject() {
@@ -46,12 +52,15 @@ public class RedisDaoTest extends BaseTest{
         p3.setProductName("asd");
         list.add(p3);
 
-        System.out.println(list.toString());
+        redisDao.delete("list");
+        redisDao.setCacheList("list",list);
+        System.out.println(redisDao.getCacheList("list"));
     }
 
     @Test
     public void test(){
-        System.out.println("ping-->"+redisDao.ping());
-        System.out.println("hasKye-->"+redisDao.hasKey("12344"));
+//        System.out.println("ping-->"+redisDao.setCacheString("asdf","123456789"));
+//        System.out.println("hasKye-->"+redisDao.getCacheString("asdf"));
+        System.out.println(redisDao.hasKey("huaj"));
     }
 }

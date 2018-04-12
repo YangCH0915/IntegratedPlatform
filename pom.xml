@@ -123,6 +123,12 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>4.3.11.RELEASE</version>
 		</dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.30</version>
+        </dependency>
 		<!-- 4)Spring test -->
 		<dependency>
 			<groupId>org.springframework</groupId>

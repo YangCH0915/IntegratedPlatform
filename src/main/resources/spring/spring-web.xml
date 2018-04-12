@@ -3,7 +3,7 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:mvc="http://www.springframework.org/schema/mvc"
-	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
@@ -14,10 +14,12 @@
 	http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- 激活组件扫描功能,扫描aop的相关组件组件 -->
-	<context:component-scan base-package="com.xinruiyun.platform.aop"/>
-	<!-- 启动对@AspectJ注解的支持 -->
+	<context:component-scan base-package="com.xinruiyun.platform">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<!-- 启动对@AspectJ注解的支持
 	<aop:aspectj-autoproxy proxy-target-class="false" />
-
+    -->
 	<!-- 配置SpringMVC -->
 	<!-- 1.开启SpringMVC注解模式 -->
 	<!-- 简化配置： 
@@ -31,16 +33,13 @@
 		(2)允许使用"/"做整体映射
 	 -->
 	 <mvc:default-servlet-handler/>
-	 
-	 <!-- 3.配置jsp 显示ViewResolver -->
+
+	<!-- 3.配置jsp 显示ViewResolver -->
 	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	 	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 	 	<property name="prefix" value="/WEB-INF/jsp/" />
 	 	<property name="suffix" value=".jsp" />
 	 </bean>
-	 
-	 <!-- 4.扫描web相关的bean -->
-	 <context:component-scan base-package="com.xinruiyun.platform.controller" />
 
 	 <!-- 全局异常处理 -->
 	 <bean id="exceptionHandler" class="com.xinruiyun.platform.exception.GlobalExceptionHandler"/>

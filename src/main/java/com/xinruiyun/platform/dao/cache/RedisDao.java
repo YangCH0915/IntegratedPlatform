@@ -1,15 +1,18 @@
 package com.xinruiyun.platform.dao.cache;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import java.util.*;
 
 public class RedisDao {
 
-    @Autowired
-    @Qualifier("redisTemplate")
+    @Resource(name = "redisTemplate")
     public RedisTemplate redisTemplate;
 
     public boolean hasKey(String key) {
@@ -17,7 +20,7 @@ public class RedisDao {
     }
 
     public void delete(String key) {
-        redisTemplate.delete(key);
+       redisTemplate.delete(key);
     }
 
     public boolean ping() {
