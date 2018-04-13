@@ -41,7 +41,15 @@
 	 	<property name="suffix" value=".jsp" />
 	 </bean>
 
+    <!-- 处理跨域请求 -->
+	<bean class="com.xinruiyun.platform.aop.CorsConfigurerAdapter"></bean>
 	 <!-- 全局异常处理 -->
 	 <bean id="exceptionHandler" class="com.xinruiyun.platform.exception.GlobalExceptionHandler"/>
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1000000000" />
+    </bean>
 
 </beans>

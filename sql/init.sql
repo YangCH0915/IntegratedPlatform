@@ -22,6 +22,10 @@ CREATE TABLE `product` (
   `product_logo` varchar(200) DEFAULT NULL COMMENT '产品LOGO地址',
   `product_bg` varchar(200) DEFAULT NULL COMMENT '产品背景',
   `product_explain` varchar(800) DEFAULT NULL COMMENT '产品说明，多条说明用竖线隔开',
+  `founder` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` DATETIME COMMENT '创建时间',
+  `renewing` varchar(32) COMMENT '更新人',
+  `update_time` DATETIME COMMENT '更新时间',
   `is_enable` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;

@@ -1,6 +1,7 @@
 package com.xinruiyun.platform.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +37,23 @@ public class Product implements Serializable{
      * 是否启用
      */
     private Integer isEnable;
+
+    /**
+     * 创建人
+     */
+    private String founder;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 更新人
+     */
+    private String renewing;
+    /**
+     * 更新时间,指渠道信息更新
+     */
+    private Date updateTime;
 
     /**
      * 子商品列表
@@ -106,6 +124,38 @@ public class Product implements Serializable{
         this.subProducts = subProducts;
     }
 
+    public String getFounder() {
+        return founder;
+    }
+
+    public void setFounder(String founder) {
+        this.founder = founder;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRenewing() {
+        return renewing;
+    }
+
+    public void setRenewing(String renewing) {
+        this.renewing = renewing;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -116,6 +166,10 @@ public class Product implements Serializable{
                 ", productBg='" + productBg + '\'' +
                 ", productExplain='" + productExplain + '\'' +
                 ", isEnable=" + isEnable +
+                ", founder='" + founder + '\'' +
+                ", createTime=" + createTime +
+                ", renewing='" + renewing + '\'' +
+                ", updateTime=" + updateTime +
                 ", subProducts=" + subProducts +
                 '}';
     }
