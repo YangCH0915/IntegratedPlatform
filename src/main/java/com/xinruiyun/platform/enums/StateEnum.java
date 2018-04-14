@@ -13,7 +13,9 @@ public enum StateEnum {
     LOGIN_FAIL(1002, "登录失败，系统异常"),
     REGISTER_ERROR(1003,"提交数据为null"),
     REGISTER_FAIL(1004, "注册不成功，数据插入失败"),
-    ADD_PRODUCT_ERROR(1005,"添加商品异常");
+    ADD_PRODUCT_ERROR(1005,"添加商品异常"),
+    PRODUCT_LIST_NULL(1006,"没有添加商品"),
+    PRODUCT_LIST_ERROR(1007,"获取商品列表异常");
 
     private int state;
 

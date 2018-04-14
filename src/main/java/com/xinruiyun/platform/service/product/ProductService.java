@@ -15,4 +15,6 @@ public interface ProductService {
     Product queryProductAndSubProduct(String productId);
 
     List<Product> queryProductList();
+
+    long getProductCount();
 }

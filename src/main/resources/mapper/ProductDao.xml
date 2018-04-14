@@ -66,4 +66,7 @@
         <collection property="subProducts" resultMap="subProductList"/>
     </resultMap>
 
+    <select id="queryProductCount" resultType="Long">
+        select count(*) from product
+    </select>
 </mapper>

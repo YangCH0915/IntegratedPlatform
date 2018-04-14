@@ -16,4 +16,6 @@ public interface ProductDao {
     Product queryProductAndSubProduct(@Param("productId")String productId);
 
     List<Product> queryProductList();
+
+    long queryProductCount();
 }

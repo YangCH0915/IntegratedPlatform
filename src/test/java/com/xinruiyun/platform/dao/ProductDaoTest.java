@@ -59,4 +59,9 @@ public class ProductDaoTest extends BaseTest{
         List<Product> products = productDao.queryProductList();
         System.out.println(products.toString());
     }
+
+    @Test
+    public void getProductCount(){
+        System.out.println("输出查询结果："+productDao.queryProductCount());
+    }
 }
