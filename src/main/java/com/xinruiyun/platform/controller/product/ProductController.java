@@ -88,11 +88,12 @@ public class ProductController {
     }
 
     @CrossOrigin(origins = Constants.COUL_URL)
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     public void getList(HttpServletResponse response){
         AuthResult<List<Product>> authResult = null;
         try{
             List<Product> products = productService.queryProductList();
+            System.out.println(products.toString());
             if(products != null){
                 authResult = new AuthResult(StateEnum.SUCCESS,products);
                 String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
