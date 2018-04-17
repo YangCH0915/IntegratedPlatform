@@ -8,13 +8,15 @@ public interface SubProductService {
 
     int addSubProduct(SubProduct subProduct);
 
-    int deleteSubProduct(String subProductId);
+    int deleteSubProduct(int id);
 
     int updateSubProduct(SubProduct subProduct);
 
-    SubProduct querySubProduct(String subProductId);
+    SubProduct querySubProduct(int id);
 
     List<SubProduct> querySubProductList();
 
     List<SubProduct> querySubProductListByProductId(String productId);
+
+    long querySubProductCount();
 }

@@ -8,9 +8,11 @@ public interface ProductService {
 
     int addProduct(Product product);
 
-    int deleteProduct(String productId);
+    int deleteProduct(int id);
 
     int updateProduct(Product product);
+
+    Product queryProductById(int id);
 
     Product queryProductAndSubProduct(String productId);
 

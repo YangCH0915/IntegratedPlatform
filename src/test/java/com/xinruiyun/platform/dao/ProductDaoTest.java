@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import javax.annotation.Resource;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -30,27 +31,28 @@ public class ProductDaoTest extends BaseTest{
 
     @Test
     public void deleteProduct() {
-        int i = productDao.deleteProduct("2000");
+        int i = productDao.deleteProduct(1);
         System.out.println(i);
     }
 
     @Test
     public void updateProduct() {
         Product product = new Product();
-        product.setId(1);
-        product.setProductId("2000");
-        product.setIsEnable(0);
-        product.setProductExplain("akjdflkajsdlfj");
-        product.setProductBg("adfsdfasdf");
-        product.setProductLogo("sd");
-        product.setProductName("asd");
+        product.setId(14);
+        product.setProductId("1004561");
+        product.setIsEnable(1);
+        product.setProductExplain("院线大片任性看,赠送观影券大片免费看,视频播放免广告");
+        product.setProductBg("");
+        product.setProductLogo("");
+        product.setProductName("搜狐会员");
+        product.setUpdateTime(new Date());
         int i = productDao.updateProduct(product);
         System.out.println(i);
     }
 
     @Test
     public void queryProductAndSubProduct() {
-        Product product = productDao.queryProductAndSubProduct("1000");
+        Product product = productDao.queryProductAndSubProduct("1004561");
         System.out.println(product.toString());
     }
 
@@ -63,5 +65,10 @@ public class ProductDaoTest extends BaseTest{
     @Test
     public void getProductCount(){
         System.out.println("输出查询结果："+productDao.queryProductCount());
+    }
+
+    @Test
+    public void queryProductById(){
+        System.out.println("输出查询结果："+productDao.queryProductById(8));
     }
 }

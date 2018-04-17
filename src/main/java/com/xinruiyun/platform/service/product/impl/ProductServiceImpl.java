@@ -21,13 +21,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int deleteProduct(String productId) {
-        return productDao.deleteProduct(productId);
+    public int deleteProduct(int id) {
+        return productDao.deleteProduct(id);
     }
 
     @Override
     public int updateProduct(Product product) {
         return productDao.updateProduct(product);
+    }
+
+    @Override
+    public Product queryProductById(int id) {
+        return productDao.queryProductById(id);
     }
 
     @Override

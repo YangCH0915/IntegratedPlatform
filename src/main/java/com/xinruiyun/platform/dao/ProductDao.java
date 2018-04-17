@@ -9,9 +9,11 @@ public interface ProductDao {
 
     int addProduct(@Param("p") Product product);
 
-    int deleteProduct(@Param("productId") String productId);
+    int deleteProduct(int id);
 
     int updateProduct(@Param("p")Product product);
+
+    Product queryProductById(int id);
 
     Product queryProductAndSubProduct(@Param("productId")String productId);
 

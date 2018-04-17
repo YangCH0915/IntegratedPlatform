@@ -9,13 +9,15 @@ public interface SubProductDao {
 
     int addSubProduct(@Param("sp")SubProduct subProduct);
 
-    int deleteSubProduct(@Param("subProductId") String subProductId);
+    int deleteSubProduct(int id);
 
     int updateSubProduct(@Param("sp") SubProduct subProduct);
 
-    SubProduct querySubProduct(@Param("subProductId")String subProductId);
+    SubProduct querySubProduct(int id);
 
     List<SubProduct> querySubProductList();
 
     List<SubProduct> querySubProductListByProductId(@Param("productId")String productId);
+
+    long querySubProductCount();
 }

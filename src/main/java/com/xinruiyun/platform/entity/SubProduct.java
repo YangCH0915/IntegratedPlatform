@@ -13,6 +13,10 @@ public class SubProduct {
      */
     private String title;
     /**
+     * 产品标题
+     */
+    private String productName;
+    /**
      * 父产品ID
      */
     private String productId;
@@ -43,7 +47,7 @@ public class SubProduct {
     /**
      * 推荐描述
      */
-    private String productExplain;
+    private String remark;
 
     public Integer getId() {
         return id;
@@ -117,12 +121,20 @@ public class SubProduct {
         this.ranking = ranking;
     }
 
-    public String getProductExplain() {
-        return productExplain;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setProductExplain(String productExplain) {
-        this.productExplain = productExplain;
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     @Override
@@ -137,7 +149,7 @@ public class SubProduct {
                 ", billingCode='" + billingCode + '\'' +
                 ", isShow=" + isShow +
                 ", ranking=" + ranking +
-                ", productExplain='" + productExplain + '\'' +
+                ", remark='" + remark + '\'' +
                 '}';
     }
 }

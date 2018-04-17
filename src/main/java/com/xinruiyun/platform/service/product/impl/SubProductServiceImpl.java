@@ -20,8 +20,8 @@ public class SubProductServiceImpl implements SubProductService{
     }
 
     @Override
-    public int deleteSubProduct(String subProductId) {
-        return subProductDao.deleteSubProduct(subProductId);
+    public int deleteSubProduct(int id) {
+        return subProductDao.deleteSubProduct(id);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class SubProductServiceImpl implements SubProductService{
     }
 
     @Override
-    public SubProduct querySubProduct(String subProductId) {
-        return subProductDao.querySubProduct(subProductId);
+    public SubProduct querySubProduct(int id) {
+        return subProductDao.querySubProduct(id);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class SubProductServiceImpl implements SubProductService{
     @Override
     public List<SubProduct> querySubProductListByProductId(String productId) {
         return subProductDao.querySubProductListByProductId(productId);
+    }
+
+    @Override
+    public long querySubProductCount() {
+        return subProductDao.querySubProductCount();
     }
 }

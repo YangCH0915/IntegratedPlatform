@@ -34,6 +34,7 @@ DROP TABLE IF EXISTS `sub_product`;
 CREATE TABLE `sub_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `title` varchar(32) NOT NULL COMMENT '产品标题',
+  `product_name` varchar(32) NOT NULL COMMENT '父产品名称',
   `product_id` varchar(32) NOT NULL COMMENT '产品ID',
   `sub_product_id` varchar(32) NOT NULL COMMENT '子产品ID',
   `price` float DEFAULT NULL COMMENT '出售价格',

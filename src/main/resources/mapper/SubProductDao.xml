@@ -5,30 +5,29 @@
 <mapper namespace="com.xinruiyun.platform.dao.SubProductDao">
     <insert id="addSubProduct">
         insert into sub_product
-            (title,product_id,sub_product_id,price,original_price,billing_code,is_show,ranking,product_explain)
+            (title,product_name,product_id,sub_product_id,price,original_price,billing_code,is_show,ranking,remark)
            values
-            (#{sp.title},#{sp.productId},#{sp.subProductId},#{sp.price},#{sp.originalPrice},
-          #{sp.billingCode},#{sp.isShow},#{sp.ranking},#{sp.productExplain})
+            (#{sp.title},#{sp.productName},#{sp.productId},#{sp.subProductId},#{sp.price},#{sp.originalPrice},
+          #{sp.billingCode},#{sp.isShow},#{sp.ranking},#{sp.remark})
     </insert>
     <delete id="deleteSubProduct">
-        delete from sub_product where sub_product_id=#{subProductId}
+        delete from sub_product where id=#{id}
     </delete>
     <update id="updateSubProduct">
         update sub_product set
           title=#{sp.title},
-          product_id=#{sp.productId},
           sub_product_id=#{sp.subProductId},
           price=#{sp.price},
           original_price=#{sp.originalPrice},
           billing_code=#{sp.billingCode},
           is_show=#{sp.isShow},
           ranking=#{sp.ranking},
-          product_explain=#{sp.productExplain}
+          remark=#{sp.remark}
            where
           id = #{sp.id}
     </update>
     <select id="querySubProduct" resultType="com.xinruiyun.platform.entity.SubProduct">
-        select * from sub_product where sub_product_id=#{subProductId}
+        select * from sub_product where id=#{id}
     </select>
     <select id="querySubProductList" resultType="com.xinruiyun.platform.entity.SubProduct">
         select * from sub_product
@@ -36,5 +35,9 @@
 
     <select id="querySubProductListByProductId" resultType="com.xinruiyun.platform.entity.SubProduct">
         select * from sub_product where product_id=#{productId}
+    </select>
+    
+    <select id="querySubProductCount" resultType="Long">
+       select count(*) from sub_product
     </select>
 </mapper>

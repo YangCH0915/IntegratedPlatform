@@ -10,29 +10,41 @@
             product_logo,
             product_bg,
             product_explain,
+            founder,
+            create_time,
             is_enable)
         values
             (#{p.productId},#{p.productName},#{p.productLogo},
-            #{p.productBg},#{p.productExplain},#{p.isEnable})
+            #{p.productBg},#{p.productExplain},#{p.founder},#{p.createTime},#{p.isEnable})
     </insert>
 
     <delete id="deleteProduct">
-        delete from product where product_id=#{productId}
+        delete from product where id=#{id}
     </delete>
 
     <update id="updateProduct">
         update product set
             product_id=#{p.productId},
             product_name=#{p.productName},
+          <if test= "p.productLogo != null and p.productLogo != ''">
             product_logo=#{p.productLogo},
+          </if>
+          <if test="p.productBg != null and p.productBg != ''">
             product_bg=#{p.productBg},
+          </if>
             product_explain=#{p.productExplain},
+            renewing = #{p.renewing},
+            update_time = #{p.updateTime},
             is_enable=#{p.isEnable}
             where id = #{p.id}
     </update>
 
     <select id="queryProductList" resultType="com.xinruiyun.platform.entity.Product">
         select * from product
+    </select>
+
+    <select id="queryProductById" resultType="com.xinruiyun.platform.entity.Product">
+        SELECT * from product where id=#{id}
     </select>
 
     <select id="queryProductAndSubProduct" resultMap="productAndSubProduct">
@@ -52,7 +64,7 @@
        <result property="billingCode" column="billing_code" />
        <result property="isShow" column="is_show" />
        <result property="ranking" column="ranking" />
-       <result property="productExplain" column="product_explain" />
+       <result property="remark" column="remark" />
    </resultMap>
 
     <resultMap id="productAndSubProduct" type="com.xinruiyun.platform.entity.Product">

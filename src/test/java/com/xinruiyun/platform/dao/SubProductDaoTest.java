@@ -23,14 +23,14 @@ public class SubProductDaoTest extends BaseTest{
         sp.setBillingCode("103948");
         sp.setRanking(0);
         sp.setIsShow(0);
-        sp.setProductExplain("jikan");
+        sp.setRemark("jikan");
         int i = subProductDao.addSubProduct(sp);
         System.out.println("插入结果："+i);
     }
 
     @Test
     public void deleteSubProduct() {
-        int i = subProductDao.deleteSubProduct("1001");
+        int i = subProductDao.deleteSubProduct(1001);
         System.out.println("删除结果："+i);
     }
 
@@ -46,14 +46,14 @@ public class SubProductDaoTest extends BaseTest{
         sp.setBillingCode("103948");
         sp.setRanking(0);
         sp.setIsShow(0);
-        sp.setProductExplain("jikan");
+        sp.setRemark("jikan");
         int i = subProductDao.updateSubProduct(sp);
         System.out.println("更新结果："+i);
     }
 
     @Test
     public void querySubProduct() {
-        SubProduct subProduct = subProductDao.querySubProduct("1003");
+        SubProduct subProduct = subProductDao.querySubProduct(1003);
         System.out.println(subProduct.toString());
     }
 
