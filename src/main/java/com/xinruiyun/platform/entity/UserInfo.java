@@ -50,6 +50,16 @@ public class UserInfo {
      */
     private String remarks;
 
+    /**
+     * 异步回调地址
+     */
+    private String notifyUrl;
+
+    /**
+     * 前端回调地址
+     */
+    private String callbackUrl;
+
     public Integer getId() {
         return id;
     }
@@ -138,20 +148,19 @@ public class UserInfo {
         this.remarks = remarks;
     }
 
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "id=" + id +
-                ", uaName='" + uaName + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", userJurisdiction=" + userJurisdiction +
-                ", html='" + html + '\'' +
-                ", founder='" + founder + '\'' +
-                ", createTime='" + createTime + '\'' +
-                ", renewing='" + renewing + '\'' +
-                ", updateTime='" + updateTime + '\'' +
-                ", remarks='" + remarks + '\'' +
-                '}';
+    public String getNotifyUrl() {
+        return notifyUrl;
+    }
+
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+    }
+
+    public String getCallbackUrl() {
+        return callbackUrl;
+    }
+
+    public void setCallbackUrl(String callbackUrl) {
+        this.callbackUrl = callbackUrl;
     }
 }

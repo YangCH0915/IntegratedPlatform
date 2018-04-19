@@ -21,7 +21,7 @@ public class SubProduct {
      */
     private String productId;
     /**
-     * 子父产品ID
+     * 子产品ID
      */
     private String subProductId;
     /**

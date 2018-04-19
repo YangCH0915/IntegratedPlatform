@@ -29,6 +29,11 @@
     <select id="querySubProduct" resultType="com.xinruiyun.platform.entity.SubProduct">
         select * from sub_product where id=#{id}
     </select>
+
+    <select id="querySubProductBySubProductId" resultType="com.xinruiyun.platform.entity.SubProduct">
+        select * from sub_product where sub_product_id=#{subProductId}
+    </select>
+
     <select id="querySubProductList" resultType="com.xinruiyun.platform.entity.SubProduct">
         select * from sub_product
     </select>

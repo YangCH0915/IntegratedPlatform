@@ -15,6 +15,8 @@ public interface SubProductDao {
 
     SubProduct querySubProduct(int id);
 
+    SubProduct querySubProductBySubProductId(String subProductId);
+
     List<SubProduct> querySubProductList();
 
     List<SubProduct> querySubProductListByProductId(@Param("productId")String productId);
