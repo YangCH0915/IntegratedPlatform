@@ -66,4 +66,5 @@ public class UserAuthController {
             Log.i(getClass(),"register exception"+e.getMessage());
         }
     }
+
 }

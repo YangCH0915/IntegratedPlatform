@@ -88,7 +88,7 @@ public class ProductController {
     }
 
     @CrossOrigin(origins = Constants.COUL_URL)
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = RequestMethod.POST)
     public void getList(HttpServletResponse response){
         AuthResult<List<Product>> authResult = null;
         try{

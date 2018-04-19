@@ -45,3 +45,37 @@ CREATE TABLE `sub_product` (
   `product_explain` varchar(50) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `pay_passageway`;
+CREATE TABLE `pay_passageway` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `passageway_name` varchar(32) NOT NULL COMMENT '通道名称',
+  `passageway_id` varchar(32) NOT NULL COMMENT '通道ID,唯一标识',
+  `encryption_type` varchar(12) DEFAULT NULL COMMENT '加密类型',
+  `pay_type` varchar(32) NOT NULL COMMENT '支付类型',
+  `mch_id` varchar(32) DEFAULT NULL COMMENT '商户号',
+  `mch_key` varchar(32) DEFAULT NULL COMMENT '商户秘钥',
+  `app_id` varchar(32) DEFAULT NULL COMMENT 'appId,公众号支付需要',
+  `app_secret` varchar(32) DEFAULT NULL COMMENT 'appSecret,公众号支付需要',
+  `is_use` int(11) DEFAULT NULL COMMENT '是否正常使用',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `order_info`;
+CREATE TABLE `order_info` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `channel_id` varchar(32) NOT NULL COMMENT '渠道ID',
+  `channel_name` varchar(32) NOT NULL COMMENT '渠道名称',
+  `pay_passageway_name` varchar(32) DEFAULT NULL COMMENT '支付通道名称',
+  `mch_id` varchar(32) NOT NULL COMMENT '商户号',
+  `pay_type` varchar(32) DEFAULT NULL COMMENT '支付类型',
+  `request_time` DATETIME DEFAULT NULL COMMENT '请求时间',
+  `finish_time` DATETIME DEFAULT NULL COMMENT '完成时间',
+  `user_info` varchar(32) DEFAULT NULL COMMENT '用户信息',
+  `product` varchar(32) DEFAULT NULL COMMENT '商品信息',
+  `money` FLOAT DEFAULT NULL COMMENT '金额',
+  `order_id` varchar(50) DEFAULT NULL COMMENT '商户订单号',
+  `platform_id` varchar(50) DEFAULT NULL COMMENT '平台订单号',
+  `state` int(11) DEFAULT NULL COMMENT '是否正常使用',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;

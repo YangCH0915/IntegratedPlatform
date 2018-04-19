@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinruiyun.platform.dao.pay.PayPassagewayDao">
+    <insert id="addPassageway">
+        insert into pay_passageway(passageway_name,
+            passageway_id,
+            encryption_type,
+            pay_type,
+            mch_id,
+            mch_key,
+            app_id,
+            app_secret,
+            is_use)
+        values
+            (#{pp.passagewayName},#{pp.passagewayId},#{pp.encryptionType},#{pp.payType},#{pp.mchId},
+            #{pp.mchKey},#{pp.appId},#{pp.appSecret},#{pp.isUse})
+    </insert>
+
+    <update id="updatePassageway">
+        update pay_passageway set
+        passageway_name=#{pp.passagewayName},
+        passageway_id=#{pp.passagewayId},
+        encryption_type=#{pp.encryptionType},
+        pay_type=#{pp.payType},
+        mch_id=#{pp.mchId},
+        mch_key=#{pp.mchKey},
+        app_id=#{pp.appId},
+        app_secret=#{pp.appSecret},
+        is_use=#{pp.isUse}
+        where id = #{pp.id}
+    </update>
+
+    <delete id="deletePassageway">
+        delete from pay_passageway where id=#{id}
+    </delete>
+
+    <select id="queryPassagewayById" resultType="com.xinruiyun.platform.entity.pay.PayPassageway">
+        select * from pay_passageway where id=#{id}
+    </select>
+    
+    <select id="queryPassagewayByPassagewayId" resultType="com.xinruiyun.platform.entity.pay.PayPassageway">
+        select * from pay_passageway where passageway_id=#{passagewayId}
+    </select>
+
+    <select id="queryPassagewayListByPage" resultType="com.xinruiyun.platform.entity.pay.PayPassageway">
+        select * from pay_passageway order by is_use desc limit #{offset},#{limit}
+    </select>
+
+    <select id="queryPassagewayCount" resultType="Long">
+        select count(*) from pay_passageway
+    </select>
+</mapper>
