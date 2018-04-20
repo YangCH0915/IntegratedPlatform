@@ -52,9 +52,9 @@ public class SwifiH5Pay implements BasePassway{
         Log.i(getClass(),"威富通请求参数："+xmlString);
         String res = "";
         try {
-            String reslut = OkHttpManager.getInstance().doPost(SWIFI_URL, xmlString);
-            if(reslut != null && !reslut.equals("")){
-                Map<String,String> resultMap = XmlUtils.toMap(reslut.getBytes("utf-8"), "utf-8");
+            String result = OkHttpManager.getInstance().doPost(SWIFI_URL, xmlString);
+            if(result != null && !result.equals("")){
+                Map<String,String> resultMap = XmlUtils.toMap(result.getBytes("utf-8"), "utf-8");
                 System.out.println("请求结果：" + resultMap.toString());
                 if(resultMap.containsKey("sign")){
                     if(!SignUtils.checkParam(resultMap, passageway.getMchKey())){
@@ -65,7 +65,6 @@ public class SwifiH5Pay implements BasePassway{
                             json.put("pay_info", pay_info);
                             json.put("out_trade_no", map.get("out_trade_no"));
                             json.put("total_fee", map.get("total_fee"));
-
                         }else{
                             json.put("result", res);
                         }

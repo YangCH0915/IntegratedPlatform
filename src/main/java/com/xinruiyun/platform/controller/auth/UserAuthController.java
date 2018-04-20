@@ -6,9 +6,11 @@ import com.xinruiyun.platform.dto.AuthResult;
 import com.xinruiyun.platform.entity.UserInfo;
 import com.xinruiyun.platform.enums.StateEnum;
 import com.xinruiyun.platform.service.user.UserService;
+import com.xinruiyun.platform.utils.Constants;
 import com.xinruiyun.platform.utils.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,6 +21,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/auth")
+@CrossOrigin(origins = Constants.COUL_URL)
 public class UserAuthController {
 
     @Autowired
