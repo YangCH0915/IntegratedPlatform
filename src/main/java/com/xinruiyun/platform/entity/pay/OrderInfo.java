@@ -1,6 +1,7 @@
 package com.xinruiyun.platform.entity.pay;
 
 import javax.xml.crypto.Data;
+import java.util.Date;
 
 public class OrderInfo {
 
@@ -10,11 +11,11 @@ public class OrderInfo {
     private String payPassagewayName;
     private String mchId;
     private String payType;
-    private Data requestTime;
-    private Data finishTime;
+    private Date requestTime;
+    private Date finishTime;
     private String userInfo;   //用户ID
     private String product;  //商品信息
-    private float money;
+    private double money;
     private String orderId;
     private String platformId;
     private String createIp;
@@ -68,19 +69,19 @@ public class OrderInfo {
         this.payType = payType;
     }
 
-    public Data getRequestTime() {
+    public Date getRequestTime() {
         return requestTime;
     }
 
-    public void setRequestTime(Data requestTime) {
+    public void setRequestTime(Date requestTime) {
         this.requestTime = requestTime;
     }
 
-    public Data getFinishTime() {
+    public Date getFinishTime() {
         return finishTime;
     }
 
-    public void setFinishTime(Data finishTime) {
+    public void setFinishTime(Date finishTime) {
         this.finishTime = finishTime;
     }
 
@@ -108,11 +109,11 @@ public class OrderInfo {
         this.state = state;
     }
 
-    public float getMoney() {
+    public double getMoney() {
         return money;
     }
 
-    public void setMoney(float money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 

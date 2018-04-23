@@ -11,6 +11,5 @@
 
     <!-- 扫描基础包 -->
     <!-- 包名除了conreoller不需要放在这里，其他的包 如果需要用到的话都需要放到这里，注入方式用的是注解注入
-    <context:component-scan base-package="包名"></context:component-scan>
-    -->
+    <context:component-scan base-package="com.xinruiyun.platform.paypassageway"/>-->
 </beans>

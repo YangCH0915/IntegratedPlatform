@@ -73,7 +73,7 @@ CREATE TABLE `order_info` (
   `finish_time` DATETIME DEFAULT NULL COMMENT '完成时间',
   `user_info` varchar(32) DEFAULT NULL COMMENT '用户信息',
   `product` varchar(32) DEFAULT NULL COMMENT '商品信息',
-  `money` FLOAT DEFAULT NULL COMMENT '金额',
+  `money` DOUBLE DEFAULT NULL COMMENT '金额',
   `order_id` varchar(50) DEFAULT NULL COMMENT '商户订单号',
   `platform_id` varchar(50) DEFAULT NULL COMMENT '平台订单号',
   `state` int(11) DEFAULT NULL COMMENT '是否正常使用',

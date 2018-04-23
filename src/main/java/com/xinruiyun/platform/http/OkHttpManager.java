@@ -118,6 +118,29 @@ public class OkHttpManager {
      * Post请求发送JSON数据
      *
      * @param url
+     * @param jsonParams
+     */
+    public String doPostJson(String url, String jsonParams) {
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8")
+                , jsonParams);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Call call = mClient.newCall(request);
+        try {
+            Response execute = call.execute();
+            return execute.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * Post请求发送JSON数据
+     *
+     * @param url
      * @param xmlParams
      */
     public String doPost(String url, String xmlParams) {
