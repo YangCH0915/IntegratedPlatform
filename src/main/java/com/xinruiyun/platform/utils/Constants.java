@@ -10,7 +10,7 @@ public class Constants {
     /**
      * 跨域访问地址
      */
-    public static final String COUL_URL = "http://127.0.0.1:8020";
+    public static final String COUL_URL = "http://192.168.1.128:8020";
 
 //    public static final String COUL_URL = "http://pay.azsdcn.com";
 

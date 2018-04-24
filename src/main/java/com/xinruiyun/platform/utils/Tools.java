@@ -54,4 +54,9 @@ public class Tools {
         }
         return ip;
     }
+
+    public static boolean isMicromessengerBrowser(HttpServletRequest request) {
+        String userAgent = request.getHeader("user-agent").toLowerCase();
+        return userAgent.contains("micromessenger");
+    }
 }

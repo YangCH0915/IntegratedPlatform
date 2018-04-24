@@ -6,9 +6,9 @@ import com.xinruiyun.platform.entity.pay.OrderInfo;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
 import com.xinruiyun.platform.http.OkHttpManager;
 import com.xinruiyun.platform.utils.Log;
-import com.xinruiyun.platform.utils.MD5;
 import com.xinruiyun.platform.utils.SignUtils;
 import com.xinruiyun.platform.utils.XmlUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -45,7 +45,7 @@ public class SwifiH5Pay implements BasePassway{
         StringBuilder buf = new StringBuilder((params.size() +1) * 10);
         SignUtils.buildPayParams(buf,params,false);
         String preStr = buf.toString();
-        String sign = MD5.getMD5Str(preStr+"&key=" +passageway.getMchKey());
+        String sign = DigestUtils.md5Hex(preStr+"&key=" +passageway.getMchKey());
         map.put("sign", sign);
 
         String xmlString = XmlUtils.parseXML(map);

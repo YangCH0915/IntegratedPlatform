@@ -22,37 +22,31 @@
             #{oi.requestTime},#{oi.finishTime},#{oi.userInfo},#{oi.product},#{oi.money},#{oi.orderId},#{oi.platformId},#{oi.state})
     </insert>
 
-    <update id="updatePassageway">
-        update pay_passageway set
-        passageway_name=#{pp.passagewayName},
-        passageway_id=#{pp.passagewayId},
-        encryption_type=#{pp.encryptionType},
-        pay_type=#{pp.payType},
-        mch_id=#{pp.mchId},
-        mch_key=#{pp.mchKey},
-        app_id=#{pp.appId},
-        app_secret=#{pp.appSecret},
-        is_use=#{pp.isUse}
-        where id = #{pp.id}
+    <update id="updateOrderInfoState">
+        update order_info set
+        platform_id=#{oi.platformId},
+        finish_time=#{oi.finishTime},
+        state=#{oi.state}
+        where id = #{oi.id}
     </update>
 
-    <delete id="deletePassageway">
-        delete from pay_passageway where id=#{id}
+    <delete id="deleteOrderInfo">
+        delete from order_info where id=#{id}
     </delete>
 
-    <select id="queryPassagewayById" resultType="com.xinruiyun.platform.entity.pay.PayPassageway">
+    <select id="queryOrderInfoById" resultType="com.xinruiyun.platform.entity.pay.OrderInfo">
         select * from pay_passageway where id=#{id}
     </select>
     
-    <select id="queryPassagewayByPassagewayId" resultType="com.xinruiyun.platform.entity.pay.PayPassageway">
-        select * from pay_passageway where passageway_id=#{passagewayId}
+    <select id="queryOrderInfoByOrderId" resultType="com.xinruiyun.platform.entity.pay.OrderInfo">
+        select * from order_info where order_id=#{orderId}
     </select>
 
-    <select id="queryPassagewayListByPage" resultType="com.xinruiyun.platform.entity.pay.PayPassageway">
-        select * from pay_passageway order by is_use desc limit #{offset},#{limit}
+    <select id="queryOrderInfoListByPage" resultType="com.xinruiyun.platform.entity.pay.OrderInfo">
+        select * from order_info order by request_time desc limit #{offset},#{limit}
     </select>
 
     <select id="queryPassagewayCount" resultType="Long">
-        select count(*) from pay_passageway
+        select count(*) from order_info
     </select>
 </mapper>

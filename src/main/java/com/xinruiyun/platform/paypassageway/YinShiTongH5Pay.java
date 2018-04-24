@@ -19,6 +19,8 @@ public class YinShiTongH5Pay {
     public static final String MCH_ID = "939290048990099";
     private static final String MCH_KEY = "8065BDC8C977D47280EADEBBFEA8F398";
 
+    public static final String NOTIFY_KEY = "2BC1A8394F2F421EBC4A75AB611FB3BB2BC1A8394F2F421E";
+
     public String orderRequest(OrderInfo orderInfo) throws UnsupportedEncodingException {
         JSONObject json = new JSONObject();
         json.put("service","wechatH5.apiorder");
@@ -33,10 +35,13 @@ public class YinShiTongH5Pay {
         requestData.put("orgcode","60088888");
         requestData.put("merno",MCH_ID);
         requestData.put("transdate", Tools.getDateTime());
-        int money = (int) (orderInfo.getMoney()*100);
+        String money = ((int) (orderInfo.getMoney()*100))+"";
+        if(orderInfo.getUserInfo().equals("18566209357")){
+            money = "001";
+        }
         requestData.put("txnAmt","000000000"+money);
         requestData.put("orderInfo", URLEncoder.encode("7天通用流量+7天芒果会员","utf-8"));
-        requestData.put("return_url","https://qy.17yichuang.com/vip/index.html");
+        requestData.put("return_url","https://qy.17yichuang.com/vip/activity-77.html");
         requestData.put("notify_url","https://qy.17yichuang.com/extension/notify");
 
         JSONObject appInfo = new JSONObject();
@@ -44,7 +49,7 @@ public class YinShiTongH5Pay {
         appInfo.put("app_name","");
         appInfo.put("bundle_id","");
         appInfo.put("package_name","");
-        appInfo.put("wap_url","https://qy.17yichuang.com/vip/index.html");
+        appInfo.put("wap_url","https://qy.17yichuang.com/vip/activity-77.html");
         appInfo.put("wap_name", "易创迅驰");
         appInfo.put("note",orderInfo.getOrderId());
         appInfo.put("attach",Tools.getTimestamp());

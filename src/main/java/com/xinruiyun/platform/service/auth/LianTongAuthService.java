@@ -2,8 +2,8 @@ package com.xinruiyun.platform.service.auth;
 
 import com.xinruiyun.platform.http.OkHttpManager;
 import com.xinruiyun.platform.utils.Log;
-import com.xinruiyun.platform.utils.MD5;
 import com.xinruiyun.platform.utils.Tools;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,7 +25,7 @@ public class LianTongAuthService {
             String orderNo = Tools.getOrder();
             sb.append("&requestNo=" + orderNo);
             sb.append("&phone=" + phone);
-            String sign = MD5.getMD5Str(CHANNEL_ID + CHANNEL_KEY + timestamp + phone);
+            String sign = DigestUtils.md5Hex(CHANNEL_ID + CHANNEL_KEY + timestamp + phone);
             sb.append("&sign=" + sign);
             Log.i(getClass(),"联通免登陆请求："+sb.toString());
             return OkHttpManager.getInstance().doGet(sb.toString());

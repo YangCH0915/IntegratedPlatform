@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -39,8 +40,10 @@ public class SignUtils {
             StringBuilder buf = new StringBuilder((params.size() +1) * 10);
             SignUtils.buildPayParams(buf,params,false);
             String preStr = buf.toString();
-            String signRecieve = MD5.getMD5Str(preStr+"&key=" + key);
-            result = sign.equalsIgnoreCase(signRecieve);
+            String signStr = preStr+key;
+            String signRecieve = DigestUtils.md5Hex(signStr);
+            System.out.println("signRecieve="+signRecieve.toUpperCase());
+            result = sign.equalsIgnoreCase(signRecieve.toUpperCase());
         }
         return result;
     }

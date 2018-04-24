@@ -76,7 +76,7 @@ public class OkHttpManager {
 
 
     /**
-     * Post请求发送键值对数据
+     * Post map 异步请求
      *
      * @param url
      * @param mapParams
@@ -93,6 +93,31 @@ public class OkHttpManager {
                 .build();
         Call call = mClient.newCall(request);
         call.enqueue(callback);
+    }
+
+    /**
+     * Post map 同步请求
+     *
+     * @param url
+     * @param mapParams
+     */
+    public String doPost(String url, Map<String, String> mapParams) {
+        FormBody.Builder builder = new FormBody.Builder();
+        for (String key : mapParams.keySet()) {
+            builder.add(key, mapParams.get(key));
+        }
+        Request request = new Request.Builder()
+                .url(url)
+                .post(builder.build())
+                .build();
+        Call call = mClient.newCall(request);
+        try {
+            Response execute = call.execute();
+            return execute.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 
