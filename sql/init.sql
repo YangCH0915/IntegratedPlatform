@@ -79,3 +79,18 @@ CREATE TABLE `order_info` (
   `state` int(11) DEFAULT NULL COMMENT '是否正常使用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `phone_ascription`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `phone_ascription` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `sectionNo` varchar(16) DEFAULT NULL,
+  `province` varchar(16) DEFAULT NULL,
+  `city` varchar(16) DEFAULT NULL,
+  `operator` varchar(16) DEFAULT NULL,
+  `areaCode` varchar(16) DEFAULT NULL,
+  `zipCode` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=360570 DEFAULT CHARSET=utf8;
