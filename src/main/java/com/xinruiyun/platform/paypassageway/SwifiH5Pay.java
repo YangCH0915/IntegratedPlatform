@@ -6,7 +6,7 @@ import com.xinruiyun.platform.entity.pay.OrderInfo;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
 import com.xinruiyun.platform.http.OkHttpManager;
 import com.xinruiyun.platform.utils.Log;
-import com.xinruiyun.platform.utils.SignUtils;
+import com.xinruiyun.platform.encrypt.SignUtils;
 import com.xinruiyun.platform.utils.XmlUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 

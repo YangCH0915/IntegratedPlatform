@@ -12,14 +12,13 @@ import com.xinruiyun.platform.paypassageway.HyYcGzhPay;
 import com.xinruiyun.platform.paypassageway.YinShiTongH5Pay;
 import com.xinruiyun.platform.utils.Constants;
 import com.xinruiyun.platform.utils.Log;
-import com.xinruiyun.platform.utils.SignUtils;
+import com.xinruiyun.platform.encrypt.SignUtils;
 import com.xinruiyun.platform.utils.Tools;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +53,7 @@ public class ExtensionController {
             if(phone != null){
                String sectionNo = phone.substring(0,7);
                 QCellCore qCellCore = qCellCoreDao.getQCellCoreBysectionNo(sectionNo);
-                if(qCellCore == null){
+                if(qCellCore != null){
                     json.put("status",-1);//非浙江移动用户
                 }else{
                     OrderInfo orderInfo = new OrderInfo();

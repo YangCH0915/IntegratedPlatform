@@ -1,36 +1,16 @@
-/**
- * Project Name:payment
- * File Name:SignUtils.java
- * Package Name:cn.swiftpass.utils.payment.sign
- * Date:2014-6-27下午3:22:33
- *
-*/
-
-package com.xinruiyun.platform.utils;
-
-import java.io.StringReader;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package com.xinruiyun.platform.encrypt;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-import org.xml.sax.InputSource;
+
+import java.net.URLEncoder;
+import java.util.*;
 
 /**
  * ClassName:SignUtils
  * Function: 签名用的工具箱
- * Date:     2014-6-27 下午3:22:33 
- * @author    
+ * @author
  */
 public class SignUtils {
-
 
     public static boolean checkParam(Map<String,String> params,String key){
         boolean result = false;
@@ -42,13 +22,12 @@ public class SignUtils {
             String preStr = buf.toString();
             String signStr = preStr+key;
             String signRecieve = DigestUtils.md5Hex(signStr);
-            System.out.println("signRecieve="+signRecieve.toUpperCase());
             result = sign.equalsIgnoreCase(signRecieve.toUpperCase());
         }
         return result;
     }
     /**
-     * 过滤参数
+     * 过滤为空和sign参数
      * @author  
      * @param sArray
      * @return
@@ -67,35 +46,20 @@ public class SignUtils {
         }
         return result;
     }
-    
-    /** <一句话功能简述>
-     * <功能详细描述>将map转成String
-     * @param payParams
-     * @return
-     * @see [类、类#方法、类#成员]
-     */
+
     public static String payParamsToString(Map<String, String> payParams){
         return payParamsToString(payParams,false);
     }
-    
+
     public static String payParamsToString(Map<String, String> payParams,boolean encoding){
         return payParamsToString(new StringBuilder(),payParams,encoding);
     }
-    /**
-     * @author 
-     * @param payParams
-     * @return
-     */
+
     public static String payParamsToString(StringBuilder sb,Map<String, String> payParams,boolean encoding){
         buildPayParams(sb,payParams,encoding);
         return sb.toString();
     }
-    
-    /**
-     * @author 
-     * @param payParams
-     * @return
-     */
+
     public static void buildPayParams(StringBuilder sb,Map<String, String> payParams,boolean encoding){
         List<String> keys = new ArrayList<String>(payParams.keySet());
         Collections.sort(keys);
@@ -118,16 +82,24 @@ public class SignUtils {
             return str;
         } 
     }
-    
-    
-    public static Element readerXml(String body,String encode) throws DocumentException {
-        SAXReader reader = new SAXReader(false);
-        InputSource source = new InputSource(new StringReader(body));
-        source.setEncoding(encode);
-        Document doc = reader.read(source);
-        Element element = doc.getRootElement();
-        return element;
+
+    public static String rasSignData(String content,String keyPath) throws Exception {
+        String signData = RSAUtil.signByPrivate(content,
+                RSAUtil.readFile(keyPath, "UTF-8"), "UTF-8");
+        return signData;
     }
 
+    public static boolean rasValidateSignData(String content,String signature,String keyPath) {
+        return RSAUtil.verifyByKeyPath(content, signature, keyPath, "UTF-8");
+    }
+
+    public static void main(String[] args) throws Exception {
+        String cotent = "我就测试一下";
+        String s = rasSignData(cotent, "E:/key/app_private_key_pkcs8.pem");
+        System.out.println("加密："+s);
+
+        boolean b = rasValidateSignData(cotent, s, "E:/key/app_public_key.pem");
+        System.out.println("验证结果："+b);
+    }
 }
 

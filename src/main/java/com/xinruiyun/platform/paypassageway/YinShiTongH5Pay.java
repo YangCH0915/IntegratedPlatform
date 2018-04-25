@@ -3,7 +3,7 @@ package com.xinruiyun.platform.paypassageway;
 import com.alibaba.fastjson.JSONObject;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
 import com.xinruiyun.platform.http.OkHttpManager;
-import com.xinruiyun.platform.utils.Encrypt;
+import com.xinruiyun.platform.encrypt.HmacEncrypt;
 import com.xinruiyun.platform.utils.Log;
 import com.xinruiyun.platform.utils.Tools;
 import org.springframework.stereotype.Service;
@@ -16,15 +16,14 @@ import java.net.URLEncoder;
 public class YinShiTongH5Pay {
 
     private static final String URL = "https://pay2.100bsh.com:180/dps/waptest/order";
-    public static final String MCH_ID = "939290048990099";
-    private static final String MCH_KEY = "8065BDC8C977D47280EADEBBFEA8F398";
-
-    public static final String NOTIFY_KEY = "2BC1A8394F2F421EBC4A75AB611FB3BB2BC1A8394F2F421E";
+    public static final String MCH_ID = "839290048169987";
+    private static final String MCH_KEY = "042E0AC9B1DBA7CF3370FA76E71F2A3D";
+    public static final String NOTIFY_KEY = "AF7E6F8844FF45EA932A0AB43583EDE3AF7E6F8844FF45EA";
 
     public String orderRequest(OrderInfo orderInfo) throws UnsupportedEncodingException {
         JSONObject json = new JSONObject();
         json.put("service","wechatH5.apiorder");
-        json.put("formid","000000000008644");
+        json.put("formid","000000000008883");
         json.put("sdkInfo","01.01.01M");
         json.put("signtype","SHA512");
         json.put("sign","");
@@ -32,7 +31,7 @@ public class YinShiTongH5Pay {
 
         JSONObject requestData = new JSONObject();
         requestData.put("orderid",orderInfo.getOrderId());
-        requestData.put("orgcode","60088888");
+        requestData.put("orgcode","64000025");
         requestData.put("merno",MCH_ID);
         requestData.put("transdate", Tools.getDateTime());
         String money = ((int) (orderInfo.getMoney()*100))+"";
@@ -55,7 +54,7 @@ public class YinShiTongH5Pay {
         appInfo.put("attach",Tools.getTimestamp());
         requestData.put("app_Info",appInfo);
         json.put("requestData",requestData);
-        json.put("sign", Encrypt.HmacSHA512(json.toJSONString(),MCH_KEY));
+        json.put("sign", HmacEncrypt.HmacSHA512(json.toJSONString(),MCH_KEY));
         Log.i(YinShiTongH5Pay.class,"支付请求参数："+json.toJSONString());
 
         String body = OkHttpManager.getInstance().doPostJson(URL, json.toJSONString());

@@ -1,4 +1,4 @@
-package com.xinruiyun.platform.utils;
+package com.xinruiyun.platform.encrypt;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-public class Encrypt {
+public class HmacEncrypt {
 
     /**
      * 26      * @param encryptText 被签名的字符串

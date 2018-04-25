@@ -8,7 +8,7 @@ import java.util.UUID;
 public class Tools {
 
     public static boolean isEmpty(String string) {
-        if (string != null && "".equals(string)) {
+        if (string == null && "".equals(string)) {
             return true;
         } else {
             return false;
