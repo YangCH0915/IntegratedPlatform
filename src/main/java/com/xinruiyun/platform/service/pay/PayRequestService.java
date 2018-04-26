@@ -9,7 +9,7 @@ public interface PayRequestService {
      * @param payType   支付类型
      * @return
      */
-    String pay(String phone,String userIp,String subProductId,String channelId,int payType);
+    String pay(String phone,String userIp,String subProductId,String channelId,String payType);
 
     /**
      * 处理通知数据，如果成功，则下发会员或流量

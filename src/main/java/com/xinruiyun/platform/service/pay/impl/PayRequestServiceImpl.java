@@ -8,6 +8,7 @@ import com.xinruiyun.platform.dto.pay.PayInfo;
 import com.xinruiyun.platform.entity.SubProduct;
 import com.xinruiyun.platform.entity.UserInfo;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
+import com.xinruiyun.platform.entity.pay.PayPassageway;
 import com.xinruiyun.platform.paypassageway.SwifiH5Pay;
 import com.xinruiyun.platform.service.pay.PayRequestService;
 import com.xinruiyun.platform.service.product.SubProductService;
@@ -32,10 +33,11 @@ public class PayRequestServiceImpl implements PayRequestService{
     public UserService userService;
 
     @Override
-    public String pay(String phone, String userIp,String subProductId,String channelId, int payType) {
+    public String pay(String phone, String userIp,String subProductId,String channelId, String payType) {
 
         UserInfo userInfo = userService.queryUserByUsername(channelId);
         SubProduct subProduct = subProductService.querySubProductBySubProductId(subProductId);
+        PayPassageway passageway = null;
 
         OrderInfo orderInfo = new OrderInfo();
         orderInfo.setChannelId(userInfo.getUserName());
@@ -45,22 +47,18 @@ public class PayRequestServiceImpl implements PayRequestService{
         orderInfo.setProduct(subProduct.getProductName());
         orderInfo.setRequestTime(new Date());
         orderInfo.setUserInfo(phone);
+        orderInfo.setPayType(payType);
+        orderInfo.setMchId(passageway.getMchId());
+        orderInfo.setPayPassagewayName(passageway.getPassageName());
+        orderInfo.setOrderId("YCXC"+Tools.getOrder());
+        orderInfoDao.addOrderInfo(orderInfo);
 
         boolean isWeiXin = true;
         String url = "";
         if(isWeiXin){//公众号支付
-            orderInfo.setMchId(SwifiH5Pay.MCH_ID);
-            orderInfo.setPayType("weixin_gzh");
-            orderInfo.setPayPassagewayName("威富通");
-            orderInfo.setOrderId(Tools.getOrder());
-            orderInfoDao.addOrderInfo(orderInfo);
+
 //            url = swifiGzhPay.getCode(orderInfo.getOrderId());
         }else{//H5支付
-            orderInfo.setMchId(SwifiH5Pay.MCH_ID);
-            orderInfo.setPayType("weixin_h5");
-            orderInfo.setPayPassagewayName("威富通");
-            orderInfo.setOrderId("YCXC"+Tools.getOrder());
-            orderInfoDao.addOrderInfo(orderInfo);
 //            JSONObject jsonObject = swifiH5Pay.pay(orderInfo);
 //            if(jsonObject.getString("status").equals("0")){
 //                url = jsonObject.getString("pay_info");
