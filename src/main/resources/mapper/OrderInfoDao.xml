@@ -16,10 +16,12 @@
             money,
             order_id,
             platform_id,
+            create_ip,
             state)
         values
             (#{oi.channelId},#{oi.channelName},#{oi.payPassagewayName},#{oi.mchId},#{oi.payType},
-            #{oi.requestTime},#{oi.finishTime},#{oi.userInfo},#{oi.product},#{oi.money},#{oi.orderId},#{oi.platformId},#{oi.state})
+            #{oi.requestTime},#{oi.finishTime},#{oi.userInfo},#{oi.product},#{oi.money},#{oi.orderId},
+            #{oi.platformId},#{oi.createIp},#{oi.state})
     </insert>
 
     <update id="updateOrderInfoState">

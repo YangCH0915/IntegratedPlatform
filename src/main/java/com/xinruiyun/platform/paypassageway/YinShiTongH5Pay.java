@@ -41,7 +41,7 @@ public class YinShiTongH5Pay {
         requestData.put("txnAmt","000000000"+money);
         requestData.put("orderInfo", URLEncoder.encode("7天通用流量+7天芒果会员","utf-8"));
         requestData.put("return_url","https://qy.17yichuang.com/vip/activity-77.html");
-        requestData.put("notify_url","https://qy.17yichuang.com/extension/notify");
+        requestData.put("notify_url","https://qy.17yichuang.com/yst/notify");
 
         JSONObject appInfo = new JSONObject();
         appInfo.put("requestFrom","WAP");

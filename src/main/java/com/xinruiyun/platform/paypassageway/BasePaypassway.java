@@ -1,6 +1,9 @@
-package com.xinruiyun.platform.service.pay;
+package com.xinruiyun.platform.paypassageway;
 
-public interface PayRequestService {
+import com.xinruiyun.platform.entity.pay.OrderInfo;
+
+public interface BasePaypassway {
+
     /**
      * 支付
      * @param phone 手机号码
@@ -9,7 +12,7 @@ public interface PayRequestService {
      * @param payType   支付类型
      * @return
      */
-    String pay(String phone,String userIp,String subProductId,String channelId,int payType);
+    String pay(String phone,String userIp,String channelId,int payType);
 
     /**
      * 处理通知数据，如果成功，则下发会员或流量

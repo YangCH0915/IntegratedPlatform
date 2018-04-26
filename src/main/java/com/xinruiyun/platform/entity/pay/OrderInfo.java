@@ -19,7 +19,7 @@ public class OrderInfo {
     private String orderId;
     private String platformId;
     private String createIp;
-    private Integer state;
+    private Integer state = -1;
 
     public long getId() {
         return id;

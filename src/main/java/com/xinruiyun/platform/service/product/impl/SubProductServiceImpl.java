@@ -35,6 +35,11 @@ public class SubProductServiceImpl implements SubProductService{
     }
 
     @Override
+    public SubProduct querySubProductBySubProductId(String subProductId) {
+        return subProductDao.querySubProductBySubProductId(subProductId);
+    }
+
+    @Override
     public List<SubProduct> querySubProductList() {
         return subProductDao.querySubProductList();
     }

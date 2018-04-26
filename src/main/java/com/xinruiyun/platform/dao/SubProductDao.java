@@ -19,7 +19,7 @@ public interface SubProductDao {
 
     List<SubProduct> querySubProductList();
 
-    List<SubProduct> querySubProductListByProductId(@Param("productId")String productId);
+    List<SubProduct> querySubProductListByProductId(String productId);
 
     long querySubProductCount();
 }

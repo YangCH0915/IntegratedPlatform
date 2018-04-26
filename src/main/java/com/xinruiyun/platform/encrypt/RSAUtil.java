@@ -31,7 +31,7 @@ import javax.crypto.NoSuchPaddingException;
 
 public class RSAUtil {
 
-    public static final String SIGN_ALGORITHMS = "SHA1WithRSA";
+    public static final String SIGN_ALGORITHMS = "SHA256WithRSA";
 
     public static String sign(String content, String input_charset, Key key)
             throws UnsupportedEncodingException, Exception {

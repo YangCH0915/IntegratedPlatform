@@ -76,6 +76,7 @@ CREATE TABLE `order_info` (
   `money` DOUBLE DEFAULT NULL COMMENT '金额',
   `order_id` varchar(50) DEFAULT NULL COMMENT '商户订单号',
   `platform_id` varchar(50) DEFAULT NULL COMMENT '平台订单号',
+  `create_ip` varchar(32) DEFAULT NULL COMMENT '用户IP',
   `state` int(11) DEFAULT NULL COMMENT '是否正常使用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;

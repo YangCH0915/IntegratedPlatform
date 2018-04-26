@@ -83,14 +83,27 @@ public class SignUtils {
         } 
     }
 
-    public static String rasSignData(String content,String keyPath) throws Exception {
-        String signData = RSAUtil.signByPrivate(content,
-                RSAUtil.readFile(keyPath, "UTF-8"), "UTF-8");
+    public static String rasSignData(String content,String keyPath){
+        String signData = null;
+        try {
+            signData = RSAUtil.signByPrivate(content,
+                    RSAUtil.readFile(keyPath, "UTF-8"), "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return signData;
     }
 
-    public static boolean rasValidateSignData(String content,String signature,String keyPath) {
-        return RSAUtil.verifyByKeyPath(content, signature, keyPath, "UTF-8");
+    public static boolean rasValidateSignData(Map<String,String> resultMap,String keyPath) {
+        String sign = resultMap.get("sign");
+        Map<String,String> Reparams = SignUtils.paraFilter(resultMap);
+        StringBuilder Rebuf = new StringBuilder((Reparams.size() +1) * 10);
+        SignUtils.buildPayParams(Rebuf,Reparams,false);
+        String RepreStr = Rebuf.toString();
+        if(RSAUtil.verifyByKeyPath(RepreStr,sign, keyPath,"UTF-8")){
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) throws Exception {
@@ -98,8 +111,8 @@ public class SignUtils {
         String s = rasSignData(cotent, "E:/key/app_private_key_pkcs8.pem");
         System.out.println("加密："+s);
 
-        boolean b = rasValidateSignData(cotent, s, "E:/key/app_public_key.pem");
-        System.out.println("验证结果："+b);
+//        boolean b = rasValidateSignData(cotent, s, "E:/key/app_public_key.pem");
+//        System.out.println("验证结果："+b);
     }
 }
 

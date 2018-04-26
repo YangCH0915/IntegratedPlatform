@@ -14,6 +14,8 @@ public interface SubProductService {
 
     SubProduct querySubProduct(int id);
 
+    SubProduct querySubProductBySubProductId(String subProductId);
+
     List<SubProduct> querySubProductList();
 
     List<SubProduct> querySubProductListByProductId(String productId);

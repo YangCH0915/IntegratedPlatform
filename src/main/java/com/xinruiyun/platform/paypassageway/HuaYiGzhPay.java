@@ -4,7 +4,7 @@ import com.xinruiyun.platform.entity.pay.OrderInfo;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HyYcGzhPay {
+public class HuaYiGzhPay {
 
     public static final String URL = "http://pay.azsdcn.com/hy/payOrder";
     public static final String MCH_ID = "8002982899629995";
@@ -27,7 +27,7 @@ public class HyYcGzhPay {
         }
         map.append("&money="+money);
         map.append("&returnUrl=https://qy.17yichuang.com/vip/activity-77.html");
-        map.append("&nofityUrl=https://qy.17yichuang.com/extension/notify_gzh");
+        map.append("&nofityUrl=https://qy.17yichuang.com/huayi/notify_gzh");
         return map.toString();
     }
 }

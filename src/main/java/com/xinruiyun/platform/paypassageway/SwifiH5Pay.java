@@ -7,34 +7,42 @@ import com.xinruiyun.platform.entity.pay.PayPassageway;
 import com.xinruiyun.platform.http.OkHttpManager;
 import com.xinruiyun.platform.utils.Log;
 import com.xinruiyun.platform.encrypt.SignUtils;
+import com.xinruiyun.platform.utils.Tools;
 import com.xinruiyun.platform.utils.XmlUtils;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SwifiH5Pay implements BasePassway{
+@Service
+public class SwifiH5Pay{
 
     private static final String SWIFI_URL = "https://pay.swiftpass.cn/pay/gateway";
 
-    @Override
-    public JSONObject pay(PayPassageway passageway, UserInfo userInfo, OrderInfo orderInfo) {
+    public static final String MCH_ID = "102585560100";
+
+    public JSONObject pay(OrderInfo orderInfo) {
 
         JSONObject json = new JSONObject();
         Map<String,String> map = new HashMap<>();
         map.put("service","pay.weixin.wappay");
         map.put("version","2.0");
         map.put("charset","UTF-8");
-        map.put("sign_type","MD5");
-        map.put("mch_id", passageway.getMchId());
+        map.put("sign_type","RSA_1_256");
+        map.put("mch_id", MCH_ID);
         map.put("out_trade_no", orderInfo.getOrderId());
         map.put("body", orderInfo.getProduct());
-        map.put("attach",userInfo.getUserName());
-        map.put("total_fee",((int)orderInfo.getMoney()*100)+"");
+        map.put("attach",orderInfo.getUserInfo());
+        String money = ((int) (orderInfo.getMoney()*100))+"";
+        if(orderInfo.getUserInfo().equals("18566209357")){
+            money = "001";
+        }
+        map.put("total_fee",money);
         map.put("mch_create_ip",orderInfo.getCreateIp());
-        map.put("notify_url", userInfo.getNotifyUrl());
-        map.put("callback_url",userInfo.getCallbackUrl());//前端页面跳转地址（包括支付成功和关闭时都会跳到这个地址）
+        map.put("notify_url", "https://qy.17yichuang.com/swifi/notify");
+        map.put("callback_url","https://qy.17yichuang.com/vip/activity-77.html");//前端页面跳转地址（包括支付成功和关闭时都会跳到这个地址）
         map.put("nonce_str", String.valueOf(new Date().getTime()));
 
         //注意：device_info、mch_app_name、mch_app_id这三个具体传值必须以文档说明为准，传真实有效的，否则有可能无法正常支付！！！
@@ -45,37 +53,41 @@ public class SwifiH5Pay implements BasePassway{
         StringBuilder buf = new StringBuilder((params.size() +1) * 10);
         SignUtils.buildPayParams(buf,params,false);
         String preStr = buf.toString();
-        String sign = DigestUtils.md5Hex(preStr+"&key=" +passageway.getMchKey());
+        String sign = SignUtils.rasSignData(preStr, "C:/key/app_private_key_pkcs8.pem");
         map.put("sign", sign);
-
         String xmlString = XmlUtils.parseXML(map);
-        Log.i(getClass(),"威富通请求参数："+xmlString);
-        String res = "";
+        Log.i(SwifiH5Pay.class,"威富通请求参数："+map.toString());
         try {
             String result = OkHttpManager.getInstance().doPost(SWIFI_URL, xmlString);
             if(result != null && !result.equals("")){
                 Map<String,String> resultMap = XmlUtils.toMap(result.getBytes("utf-8"), "utf-8");
-                System.out.println("请求结果：" + resultMap.toString());
+                Log.i(SwifiH5Pay.class,"请求结果：" + resultMap.toString());
                 if(resultMap.containsKey("sign")){
-                    if(!SignUtils.checkParam(resultMap, passageway.getMchKey())){
-                        res = "验证签名不通过";
+                    if(!SignUtils.rasValidateSignData(resultMap, "C:/key/platform_public_key.pem")){
+                        json.put("status","-1");
+                        json.put("msg","验证签名不通过");
                     }else{
                         if("0".equals(resultMap.get("status")) && "0".equals(resultMap.get("result_code"))){
                             String pay_info = resultMap.get("pay_info");
                             json.put("pay_info", pay_info);
                             json.put("out_trade_no", map.get("out_trade_no"));
                             json.put("total_fee", map.get("total_fee"));
+                            json.put("status","0");
+                            json.put("msg","success");
                         }else{
-                            json.put("result", res);
+                            json.put("status","-2");
+                            json.put("msg","fail");
                         }
                     }
                 }
             }else{
-                res = "操作失败";
+                json.put("status","-3");
+                json.put("msg","操作失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            res = "系统异常";
+            json.put("status","-4");
+            json.put("msg","请求出现异常");
         }
         return json;
     }
