@@ -4,6 +4,7 @@ import com.xinruiyun.platform.business.VideoMember;
 import com.xinruiyun.platform.dao.pay.OrderInfoDao;
 import com.xinruiyun.platform.encrypt.SignUtils;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
+import com.xinruiyun.platform.paypassageway.PayPassagewayFactory;
 import com.xinruiyun.platform.utils.Log;
 import com.xinruiyun.platform.utils.XmlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class SwifiPayResult {
                                     orderInfoDao.updateOrderInfoState(orderInfo);
 
                                     String liuliangUrl = "", vipUrl = "";
-                                    if (orderInfo.getUserInfo().equals("18566209357")) {
+                                    if (orderInfo.getUserInfo().equals(PayPassagewayFactory.TEST_PHONE)) {
                                         liuliangUrl = VideoMember.TEST;
                                         vipUrl = VideoMember.TEST;
                                     } else {
@@ -64,7 +65,7 @@ public class SwifiPayResult {
                                     VideoMember.openMember(vipUrl, orderInfo.getOrderId(),
                                             orderInfo.getUserInfo(), VideoMember.MANGGUO_PRODUCT_ID);
                                 }else{
-                                    Log.i(getClass(), "订单不存在：" + orderId);
+                                    Log.i(getClass(), "订单不存在或已处理：" + orderId);
                                 }
                             }
                         } else {

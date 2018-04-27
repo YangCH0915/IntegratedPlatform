@@ -9,6 +9,7 @@ import com.xinruiyun.platform.entity.SubProduct;
 import com.xinruiyun.platform.entity.UserInfo;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
+import com.xinruiyun.platform.paypassageway.PayPassagewayFactory;
 import com.xinruiyun.platform.paypassageway.SwifiH5Pay;
 import com.xinruiyun.platform.service.pay.PayRequestService;
 import com.xinruiyun.platform.service.product.SubProductService;
@@ -53,18 +54,8 @@ public class PayRequestServiceImpl implements PayRequestService{
         orderInfo.setOrderId("YCXC"+Tools.getOrder());
         orderInfoDao.addOrderInfo(orderInfo);
 
-        boolean isWeiXin = true;
-        String url = "";
-        if(isWeiXin){//公众号支付
-
-//            url = swifiGzhPay.getCode(orderInfo.getOrderId());
-        }else{//H5支付
-//            JSONObject jsonObject = swifiH5Pay.pay(orderInfo);
-//            if(jsonObject.getString("status").equals("0")){
-//                url = jsonObject.getString("pay_info");
-//            }
-        }
-        return null;
+        String payUrl = PayPassagewayFactory.passageway(passageway.getPassageName(), payType).pay(orderInfo);
+        return payUrl;
     }
 
     @Override

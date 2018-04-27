@@ -7,6 +7,7 @@ import com.xinruiyun.platform.business.VideoMember;
 import com.xinruiyun.platform.dao.pay.OrderInfoDao;
 import com.xinruiyun.platform.encrypt.SignUtils;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
+import com.xinruiyun.platform.paypassageway.PayPassagewayFactory;
 import com.xinruiyun.platform.paypassageway.YinShiTongH5Pay;
 import com.xinruiyun.platform.utils.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,12 @@ public class YinShiTongH5PayResult {
             if(orderInfo != null){
                 if(respCode.equals("00")){
                     if(checkSign(json)){
+                        if(orderInfo.getState() == 0){
+                            Log.i(getClass(),"已处理过该订单"+orderId);
+                            responseJson.put("respCode","00");
+                            response.getWriter().write(responseJson.toJSONString());
+                            return;
+                        }
                         responseJson.put("respCode","00");
                         Log.i(getClass(),"签名验证通过："+orderId);
                         response.getWriter().write(responseJson.toJSONString());
@@ -53,7 +60,7 @@ public class YinShiTongH5PayResult {
                         orderInfoDao.updateOrderInfoState(orderInfo);
 
                         String liuliangUrl = "",vipUrl = "";
-                        if(orderInfo.getUserInfo().equals("18566209357")){
+                        if(orderInfo.getUserInfo().equals(PayPassagewayFactory.TEST_PHONE)){
                             liuliangUrl = VideoMember.TEST;
                             vipUrl = VideoMember.TEST;
                         }else{
@@ -84,13 +91,9 @@ public class YinShiTongH5PayResult {
     }
 
     private boolean checkSign(JSONObject json){
-        String sign = json.getString("sign");
-        json.remove("signature");
-        json.remove("accNo");
-        json.remove("reserved");
-        json.remove("payCardType");
+        String signature = json.getString("signature");
         Map<String,String> parse = (Map) JSON.parse(json.toJSONString());
-        boolean b = SignUtils.checkParam(parse, YinShiTongH5Pay.NOTIFY_KEY);
-        return b;
+        String sign = SignUtils.checkParam(parse, YinShiTongH5Pay.NOTIFY_KEY);
+        return signature.equalsIgnoreCase(sign.toUpperCase());
     }
 }

@@ -1,19 +1,19 @@
 package com.xinruiyun.platform.paypassageway;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xinruiyun.platform.encrypt.HmacEncrypt;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
 import com.xinruiyun.platform.http.OkHttpManager;
-import com.xinruiyun.platform.encrypt.HmacEncrypt;
 import com.xinruiyun.platform.utils.Log;
 import com.xinruiyun.platform.utils.Tools;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Date;
 
 @Service
-public class YinShiTongH5Pay implements BasePayPassageway{
+public class YinShiTongAliH5Pay implements BasePayPassageway{
 
     private static final String URL = "https://pay2.100bsh.com:180/dps/waptest/order";
     public static final String MCH_ID = "839290048169987";
@@ -23,7 +23,7 @@ public class YinShiTongH5Pay implements BasePayPassageway{
     public String pay(OrderInfo orderInfo){
         try{
             JSONObject json = new JSONObject();
-            json.put("service","wechatH5.apiorder");
+            json.put("service","alipayH5.apiorder");
             json.put("formid","000000000008883");
             json.put("sdkInfo","01.01.01M");
             json.put("signtype","SHA512");
@@ -56,10 +56,10 @@ public class YinShiTongH5Pay implements BasePayPassageway{
             requestData.put("app_Info",appInfo);
             json.put("requestData",requestData);
             json.put("sign", HmacEncrypt.HmacSHA512(json.toJSONString(),MCH_KEY));
-            Log.i(YinShiTongH5Pay.class,"支付请求参数："+json.toJSONString());
+            Log.i(YinShiTongAliH5Pay.class,"支付请求参数："+json.toJSONString());
 
             String body = OkHttpManager.getInstance().doPostJson(URL, json.toJSONString());
-            Log.i(YinShiTongH5Pay.class,"返回结果："+body);
+            Log.i(YinShiTongAliH5Pay.class,"返回结果："+body);
             JSONObject result = JSONObject.parseObject(body);
             String resultCode = result.getString("resultcode");
             if(resultCode.equals("0000")){
@@ -72,14 +72,13 @@ public class YinShiTongH5Pay implements BasePayPassageway{
                     postStr = URLDecoder.decode(postStr,"utf-8");
                     postURL = URLDecoder.decode(postURL,"utf-8");
                     String postUrl = postURL+"?"+postStr;
-                    System.out.println("H5地址："+postUrl);
                     return postUrl;
                 }else{
                     String errorinfo = responsedata.getString("errorinfo");
-                    Log.i(YinShiTongH5Pay.class,"返回结果异常："+errorinfo+"--订单号："+orderid);
+                    Log.i(YinShiTongAliH5Pay.class,"返回结果异常："+errorinfo+"--订单号："+orderid);
                 }
             }else{
-                Log.i(YinShiTongH5Pay.class,"请求失败");
+                Log.i(YinShiTongAliH5Pay.class,"请求失败");
             }
         }catch (Exception e){
             Log.i(getClass(),"异常："+e.getMessage());

@@ -55,6 +55,11 @@ public class Tools {
         return ip;
     }
 
+    /**
+     * 判断是否微信浏览器
+     * @param request
+     * @return true 表示微信浏览器
+     */
     public static boolean isMicromessengerBrowser(HttpServletRequest request) {
         String userAgent = request.getHeader("user-agent").toLowerCase();
         return userAgent.contains("micromessenger");

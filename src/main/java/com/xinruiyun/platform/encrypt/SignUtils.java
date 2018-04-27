@@ -12,19 +12,14 @@ import java.util.*;
  */
 public class SignUtils {
 
-    public static boolean checkParam(Map<String,String> params,String key){
-        boolean result = false;
-        if(params.containsKey("sign")){
-            String sign = params.get("sign");
-            params.remove("sign");
-            StringBuilder buf = new StringBuilder((params.size() +1) * 10);
-            SignUtils.buildPayParams(buf,params,false);
-            String preStr = buf.toString();
-            String signStr = preStr+key;
-            String signRecieve = DigestUtils.md5Hex(signStr);
-            result = sign.equalsIgnoreCase(signRecieve.toUpperCase());
-        }
-        return result;
+    public static String checkParam(Map<String,String> params,String key){
+        Map<String, String> stringMap = SignUtils.paraFilter(params);
+        StringBuilder buf = new StringBuilder((stringMap.size() +1) * 10);
+        SignUtils.buildPayParams(buf,stringMap,false);
+        String preStr = buf.toString();
+        String signStr = preStr+key;
+        String signRecieve = DigestUtils.md5Hex(signStr);
+        return signRecieve;
     }
     /**
      * 过滤为空和sign参数
@@ -39,7 +34,8 @@ public class SignUtils {
         }
         for (String key : sArray.keySet()) {
             String value = sArray.get(key);
-            if (value == null || value.equals("") || key.equalsIgnoreCase("sign")) {
+            if (value == null || value.equals("") || key.equalsIgnoreCase("sign")
+                    || key.equalsIgnoreCase("signature")) {
                 continue;
             }
             result.put(key, value);

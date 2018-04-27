@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class SwifiGzhPay {
+public class SwifiGzhPay implements BasePayPassageway{
 
     private static final String SWIFI_URL = "https://pay.swiftpass.cn/pay/gateway";
 
@@ -28,7 +28,7 @@ public class SwifiGzhPay {
 
     private static String baseUrl = "https://qy.17yichuang.com/gzh/";
 
-    public String getCode(String orderId){
+    public String pay(OrderInfo orderInfo){
         try {
             //授权后要跳转的链接
             String backUri = baseUrl + "toPay";
@@ -36,7 +36,7 @@ public class SwifiGzhPay {
             String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                     "appid=" + APP_ID +
                     "&redirect_uri=" + backUri+
-                    "&response_type=code&scope=snsapi_base&state="+orderId+"#wechat_redirect";
+                    "&response_type=code&scope=snsapi_base&state="+orderInfo.getOrderId()+"#wechat_redirect";
             return url;
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,7 +59,7 @@ public class SwifiGzhPay {
         map.put("sub_appid", APP_ID);
         map.put("attach", orderInfo.getUserInfo());
         String money = ((int) (orderInfo.getMoney() * 100)) + "";
-        if (orderInfo.getUserInfo().equals("18566209357")) {
+        if (orderInfo.getUserInfo().equals(PayPassagewayFactory.TEST_PHONE)) {
             money = "1";
         }
         map.put("total_fee", money);

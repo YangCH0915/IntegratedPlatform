@@ -4,6 +4,7 @@ import com.xinruiyun.platform.business.VideoMember;
 import com.xinruiyun.platform.dao.pay.OrderInfoDao;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
 import com.xinruiyun.platform.paypassageway.HuaYiGzhPay;
+import com.xinruiyun.platform.paypassageway.PayPassagewayFactory;
 import com.xinruiyun.platform.utils.Log;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class HuaYiGzhPayResult {
         OrderInfo orderInfo = orderInfoDao.queryOrderInfoByOrderId(orderNo);
         if(orderInfo != null){
             if(creatAliSign(map, HuaYiGzhPay.MCH_KEY).equals(sign)){
+                if(orderInfo.getState() == 0){
+                    Log.i(getClass(),"已处理过该订单"+orderInfo.getOrderId());
+                    response.getWriter().write("success");
+                    return;
+                }
                 response.getWriter().write("success");
                 Log.i(this.getClass(), "验证签名通过,正常统计:"+orderNo);
                 orderInfo.setPlatformId("");
@@ -49,7 +55,7 @@ public class HuaYiGzhPayResult {
                 orderInfoDao.updateOrderInfoState(orderInfo);
 
                 String liuliangUrl = "",vipUrl = "";
-                if(orderInfo.getUserInfo().equals("18566209357")){
+                if(orderInfo.getUserInfo().equals(PayPassagewayFactory.TEST_PHONE)){
                     liuliangUrl = VideoMember.TEST;
                     vipUrl = VideoMember.TEST;
                 }else{

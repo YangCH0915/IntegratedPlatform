@@ -17,13 +17,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class SwifiH5Pay{
+public class SwifiH5Pay implements BasePayPassageway{
 
     private static final String SWIFI_URL = "https://pay.swiftpass.cn/pay/gateway";
 
     public static final String MCH_ID = "102585560100";
 
-    public JSONObject pay(OrderInfo orderInfo) {
+    public String pay(OrderInfo orderInfo) {
 
         JSONObject json = new JSONObject();
         Map<String,String> map = new HashMap<>();
@@ -36,8 +36,8 @@ public class SwifiH5Pay{
         map.put("body", orderInfo.getProduct());
         map.put("attach",orderInfo.getUserInfo());
         String money = ((int) (orderInfo.getMoney()*100))+"";
-        if(orderInfo.getUserInfo().equals("18566209357")){
-            money = "001";
+        if(orderInfo.getUserInfo().equals(PayPassagewayFactory.TEST_PHONE)){
+            money = "1";
         }
         map.put("total_fee",money);
         map.put("mch_create_ip",orderInfo.getCreateIp());
@@ -57,6 +57,8 @@ public class SwifiH5Pay{
         map.put("sign", sign);
         String xmlString = XmlUtils.parseXML(map);
         Log.i(SwifiH5Pay.class,"威富通请求参数："+map.toString());
+
+        String resultStr = "";
         try {
             String result = OkHttpManager.getInstance().doPost(SWIFI_URL, xmlString);
             if(result != null && !result.equals("")){
@@ -66,29 +68,28 @@ public class SwifiH5Pay{
                     if(!SignUtils.rasValidateSignData(resultMap, "C:/key/platform_public_key.pem")){
                         json.put("status","-1");
                         json.put("msg","验证签名不通过");
+                        resultStr = json.toJSONString();
                     }else{
                         if("0".equals(resultMap.get("status")) && "0".equals(resultMap.get("result_code"))){
-                            String pay_info = resultMap.get("pay_info");
-                            json.put("pay_info", pay_info);
-                            json.put("out_trade_no", map.get("out_trade_no"));
-                            json.put("total_fee", map.get("total_fee"));
-                            json.put("status","0");
-                            json.put("msg","success");
+                            resultStr = resultMap.get("pay_info");
                         }else{
                             json.put("status","-2");
                             json.put("msg","fail");
+                            resultStr = json.toJSONString();
                         }
                     }
                 }
             }else{
                 json.put("status","-3");
                 json.put("msg","操作失败");
+                resultStr = json.toJSONString();
             }
         } catch (Exception e) {
             e.printStackTrace();
             json.put("status","-4");
             json.put("msg","请求出现异常");
+            resultStr = json.toJSONString();
         }
-        return json;
+        return resultStr;
     }
 }

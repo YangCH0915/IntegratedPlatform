@@ -3,8 +3,8 @@ package com.xinruiyun.platform.paypassageway;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
 import org.springframework.stereotype.Service;
 
-@Service
-public class HuaYiGzhPay {
+
+public class HuaYiGzhPay implements BasePayPassageway{
 
     public static final String URL = "http://pay.azsdcn.com/hy/payOrder";
     public static final String MCH_ID = "8002982899629995";
