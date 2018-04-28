@@ -26,7 +26,7 @@ public class ExtensionController {
     public QCellCoreDao qCellCoreDao;
 
     @RequestMapping(value = "mg77")
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     public void mangGuo7and7(HttpServletRequest request, HttpServletResponse response){
         try {
             String phone = request.getParameter("phone");

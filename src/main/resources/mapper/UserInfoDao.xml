@@ -61,11 +61,27 @@
          update user_info set password=#{password} where user_name=#{userName}
     </update>
 
+    <sql id="userObject">
+        select id,user_name,password,ua_name,user_jurisdiction,html,founder,
+         create_time,
+         renewing,
+         update_time,
+         remarks
+    </sql>
+
     <select id="queryUserByPage" resultType="com.xinruiyun.platform.entity.UserInfo">
-        select * from user_info order by create_time desc limit #{offset},#{limit}
+        <include refid="userObject"/>
+        from user_info
+        <if test="pq.operator != null and pq.operator != ''">
+            where founder=#{pq.operator}
+        </if>
+        order by create_time desc limit #{pq.pageIndex},#{pq.pageSize}
     </select>
 
-    <select id="queryAllCount">
+    <select id="queryAllCount" resultType="Long">
         select count(*) from user_info
+        <if test="founder != null and founder != ''">
+            where founder=#{founder}
+        </if>
     </select>
 </mapper>

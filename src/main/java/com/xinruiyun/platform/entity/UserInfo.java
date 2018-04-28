@@ -1,5 +1,9 @@
 package com.xinruiyun.platform.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.xinruiyun.platform.utils.Tools;
+
 import java.util.Date;
 
 public class UserInfo {
@@ -35,7 +39,9 @@ public class UserInfo {
     private String founder;
     /**
      * 创建时间
+     * @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
      */
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date createTime;  //创建时间,指渠道账户创建时间
     /**
      * 更新人
@@ -44,6 +50,7 @@ public class UserInfo {
     /**
      * 更新时间,指渠道信息更新
      */
+    @JSONField (format="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
     /**
      * 备注
@@ -117,6 +124,7 @@ public class UserInfo {
     }
 
     public Date getCreateTime() {
+
         return createTime;
     }
 
@@ -162,5 +170,24 @@ public class UserInfo {
 
     public void setCallbackUrl(String callbackUrl) {
         this.callbackUrl = callbackUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", uaName='" + uaName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userJurisdiction=" + userJurisdiction +
+                ", html='" + html + '\'' +
+                ", founder='" + founder + '\'' +
+                ", createTime=" + createTime +
+                ", renewing='" + renewing + '\'' +
+                ", updateTime=" + updateTime +
+                ", remarks='" + remarks + '\'' +
+                ", notifyUrl='" + notifyUrl + '\'' +
+                ", callbackUrl='" + callbackUrl + '\'' +
+                '}';
     }
 }

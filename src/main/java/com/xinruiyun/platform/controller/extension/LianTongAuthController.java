@@ -20,7 +20,7 @@ public class LianTongAuthController {
     @Autowired
     public LianTongAuthService lianTongAuthService;
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "activity")
     public void login(HttpServletRequest request, HttpServletResponse response) {
         try {

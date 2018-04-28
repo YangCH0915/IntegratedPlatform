@@ -1,6 +1,7 @@
 package com.xinruiyun.platform.utils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -35,6 +36,33 @@ public class Tools {
         return sdf.format(new Date());
     }
 
+    /*
+     * 将时间戳转换为时间
+     */
+    public static String stampToDate(Date date){
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
+    /*
+     * 将时间戳
+     */
+    public static String dateToStamp(String s){
+        String res = null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date;
+        try {
+            date = simpleDateFormat.parse(s);
+            long ts = date.getTime();
+            res = String.valueOf(ts);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
     public static String getIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
@@ -63,5 +91,13 @@ public class Tools {
     public static boolean isMicromessengerBrowser(HttpServletRequest request) {
         String userAgent = request.getHeader("user-agent").toLowerCase();
         return userAgent.contains("micromessenger");
+    }
+
+    public static Integer checkValue(String value){
+        if(value == null || value.equals("")){
+            return -1;
+        }else{
+            return Integer.valueOf(value);
+        }
     }
 }

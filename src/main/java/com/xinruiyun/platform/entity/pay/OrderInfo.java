@@ -20,6 +20,8 @@ public class OrderInfo {
     private String platformId;
     private String createIp;
     private Integer state = -1;
+    private String productName;
+    private String subProductName;
 
     public long getId() {
         return id;
@@ -139,6 +141,22 @@ public class OrderInfo {
 
     public void setCreateIp(String createIp) {
         this.createIp = createIp;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getSubProductName() {
+        return subProductName;
+    }
+
+    public void setSubProductName(String subProductName) {
+        this.subProductName = subProductName;
     }
 
     @Override

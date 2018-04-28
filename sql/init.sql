@@ -81,6 +81,9 @@ CREATE TABLE `order_info` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
+alter table order_info add product_name varchar(32) DEFAULT NULL ;
+alter table order_info add sub_product_name varchar(32) DEFAULT NULL ;
+
 
 DROP TABLE IF EXISTS `phone_ascription`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

@@ -1,11 +1,15 @@
 package com.xinruiyun.platform.service.user.impl;
 
 import com.xinruiyun.platform.dao.UserInfoDao;
+import com.xinruiyun.platform.dto.PagingQuery;
 import com.xinruiyun.platform.entity.UserInfo;
 import com.xinruiyun.platform.service.user.UserService;
+import com.xinruiyun.platform.utils.Constants;
+import com.xinruiyun.platform.utils.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,6 +20,23 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int addUserInfo(UserInfo userInfo) {
+        userInfo.setCreateTime(new Date());
+        UserInfo ui = queryUserByUsername(userInfo.getUserName());
+        if(ui != null){
+            return -1;
+        }
+        Integer userJurisdiction = userInfo.getUserJurisdiction();
+        switch (userJurisdiction){
+            case Constants.JURI_SUPERADMIN:
+                userInfo.setHtml(Constants.HTML_SUPERADMIN);
+                break;
+            case Constants.JURI_OPERATOR:
+                userInfo.setHtml(Constants.HTML_OPERATOR);
+                break;
+            case Constants.JURI_DOWNSTREAM_CHANNEL:
+                userInfo.setHtml(Constants.HTML_DOWNSTREAM_CHANNEL);
+                break;
+        }
         return userInfoDao.addUserInfo(userInfo);
     }
 
@@ -60,12 +81,36 @@ return userInfoDao.deleteUserByUsername(userName);
     }
 
     @Override
-    public List<UserInfo> queryUserByPage(int offset, int limit) {
-        return userInfoDao.queryUserByPage(offset,limit);
+    public List<UserInfo> queryUserByPage(PagingQuery pagingQuery) {
+        UserInfo userInfo = queryUserByUsername(pagingQuery.getOperator());
+        if(userInfo == null){
+            return null;
+        }
+        Integer userJuri = userInfo.getUserJurisdiction();
+        if(userJuri == Constants.JURI_SUPERADMIN){
+            pagingQuery.setOperator("");
+        }
+        int offset = (int) (pagingQuery.getTotalRecords() - (pagingQuery.getPageSize()*pagingQuery.getPageIndex()));
+        if(offset<0){
+            pagingQuery.setPageSize(pagingQuery.getPageSize()+offset);
+            offset = 0;
+            pagingQuery.setPageIndex(offset);
+        }else{
+            pagingQuery.setPageIndex(offset);
+        }
+        return userInfoDao.queryUserByPage(pagingQuery);
     }
 
     @Override
-    public long queryAllCount() {
-        return userInfoDao.queryAllCount();
+    public long queryAllCount(String userName) {
+        UserInfo userInfo = queryUserByUsername(userName);
+        if(userInfo == null){
+            return 0;
+        }
+        Integer userJuri = userInfo.getUserJurisdiction();
+        if(userJuri == Constants.JURI_SUPERADMIN){
+            userName = "";
+        }
+        return userInfoDao.queryAllCount(userName);
     }
 }

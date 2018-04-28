@@ -30,7 +30,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public void addProduct(Product product,HttpServletResponse response){
         AuthResult<Product> authResult = null;
@@ -53,7 +53,7 @@ public class ProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     public void uploadPic(@RequestParam(value="file", required=false)MultipartFile file,
                           HttpServletRequest request,HttpServletResponse response){
@@ -87,7 +87,7 @@ public class ProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/list",method = RequestMethod.POST)
     public void getList(HttpServletResponse response){
         AuthResult<List<Product>> authResult = null;
@@ -117,7 +117,7 @@ public class ProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/count",method = RequestMethod.GET)
     public void getCount(HttpServletResponse response){
         AuthResult<Product> authResult = null;
@@ -139,7 +139,7 @@ public class ProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/getProductAndSubProduct",method = RequestMethod.GET)
     public void queryProductAndSubProduct(HttpServletRequest request,HttpServletResponse response){
         String productId = request.getParameter("productId");
@@ -162,7 +162,7 @@ public class ProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/getProductById",method = RequestMethod.GET)
     public void getProductById(HttpServletRequest request,HttpServletResponse response){
         String id = request.getParameter("id");
@@ -185,7 +185,7 @@ public class ProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/updateProduct",method = RequestMethod.POST)
     public void updateProduct(Product product,HttpServletResponse response){
         AuthResult<Product> authResult = null;
@@ -209,7 +209,7 @@ public class ProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/deleteProductById",method = RequestMethod.GET)
     public void deleteProductById(HttpServletRequest request,HttpServletResponse response){
         AuthResult<String> authResult = null;

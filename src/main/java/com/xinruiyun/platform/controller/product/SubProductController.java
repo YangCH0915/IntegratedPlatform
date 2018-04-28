@@ -6,24 +6,18 @@ import com.xinruiyun.platform.dto.AuthResult;
 import com.xinruiyun.platform.entity.Product;
 import com.xinruiyun.platform.entity.SubProduct;
 import com.xinruiyun.platform.enums.StateEnum;
-import com.xinruiyun.platform.service.product.ProductService;
 import com.xinruiyun.platform.service.product.SubProductService;
-import com.xinruiyun.platform.service.product.impl.SubProductServiceImpl;
 import com.xinruiyun.platform.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/subProduct")
@@ -32,7 +26,7 @@ public class SubProductController {
     @Autowired
     private SubProductService subProductService;
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public void addProduct(SubProduct subProduct, HttpServletResponse response){
         AuthResult<Product> authResult = null;
@@ -54,7 +48,7 @@ public class SubProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public void uploadPic( SubProduct subProduct,HttpServletResponse response){
         AuthResult<SubProduct> authResult = null;
@@ -76,7 +70,7 @@ public class SubProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/list",method = RequestMethod.POST)
     public void getList(HttpServletResponse response){
         AuthResult<List<SubProduct>> authResult = null;
@@ -105,7 +99,7 @@ public class SubProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/count",method = RequestMethod.GET)
     public void getCount(HttpServletResponse response){
         AuthResult<Long> authResult = null;
@@ -127,7 +121,7 @@ public class SubProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/getSubProductById",method = RequestMethod.GET)
     public void getSubProductById(HttpServletRequest request,HttpServletResponse response){
         AuthResult<SubProduct> authResult = null;
@@ -151,7 +145,7 @@ public class SubProductController {
         }
     }
 
-    @CrossOrigin(origins = Constants.COUL_URL)
+    @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/deleteSubProductById",method = RequestMethod.GET)
     public void deleteSubProductById(HttpServletRequest request,HttpServletResponse response){
         AuthResult<Integer> authResult = null;

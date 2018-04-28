@@ -1,5 +1,6 @@
 package com.xinruiyun.platform.service.user;
 
+import com.xinruiyun.platform.dto.PagingQuery;
 import com.xinruiyun.platform.entity.UserInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -47,14 +48,12 @@ public interface UserService {
 
     /**
      * 分页查找
-     * @param offset 开始位置
-     * @param limit 查询多少条
      * @return
      */
-    List<UserInfo> queryUserByPage(int offset,int limit);
+    List<UserInfo> queryUserByPage(PagingQuery pagingQuery);
 
     /**
      * 查询总数量
      */
-    long queryAllCount();
+    long queryAllCount(String founder);
 }

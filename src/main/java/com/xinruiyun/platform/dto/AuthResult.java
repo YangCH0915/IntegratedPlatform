@@ -8,9 +8,6 @@ public class AuthResult<T> {
     private T data;
     private String msg;
 
-    public AuthResult() {
-    }
-
     public AuthResult(StateEnum stateEnum, T data) {
         this.state = stateEnum.getState();
         this.data = data;
