@@ -14,6 +14,10 @@ CREATE TABLE `user_info` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+ALTER TABLE user_info ADD COLUMN `callback_url` VARCHAR(150) NULL AFTER `update_time`,
+  ADD COLUMN `notify_url` VARCHAR(150) NULL AFTER `callback_url`;
+
+
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
@@ -83,7 +87,6 @@ CREATE TABLE `order_info` (
 
 alter table order_info add product_name varchar(32) DEFAULT NULL ;
 alter table order_info add sub_product_name varchar(32) DEFAULT NULL ;
-
 
 DROP TABLE IF EXISTS `phone_ascription`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

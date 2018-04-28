@@ -13,10 +13,13 @@
             create_time,
             renewing,
             update_time,
+            callback_url,
+            notify_url,
             remarks)
         values
             (#{user.userName},#{user.password},#{user.uaName},#{user.userJurisdiction},#{user.html},
-            #{user.founder},#{user.createTime},#{user.renewing},#{user.updateTime},#{user.remarks})
+            #{user.founder},#{user.createTime},#{user.renewing},#{user.updateTime},
+            #{user.callbackUrl},#{user.notifyUrl},#{user.remarks})
     </insert>
 
     <update id="updateUserInfo">
@@ -29,6 +32,8 @@
         create_time=#{user.createTime},
         renewing=#{user.renewing},
         update_time=#{user.updateTime},
+        callback_url=#{user.callbackUrl},
+        notify_url=#{user.notifyUrl},
         renewing=#{user.renewing}
         where id = #{user.id}
     </update>
