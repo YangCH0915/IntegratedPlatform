@@ -50,11 +50,11 @@ public class PayRequestServiceImpl implements PayRequestService{
         orderInfo.setUserInfo(phone);
         orderInfo.setPayType(payType);
         orderInfo.setMchId(passageway.getMchId());
-        orderInfo.setPayPassagewayName(passageway.getPassageName());
+        orderInfo.setPayPassagewayName(passageway.getPassagewayName());
         orderInfo.setOrderId("YCXC"+Tools.getOrder());
         orderInfoDao.addOrderInfo(orderInfo);
 
-        String payUrl = PayPassagewayFactory.passageway(passageway.getPassageName(), payType).pay(orderInfo);
+        String payUrl = PayPassagewayFactory.passageway(passageway.getPassagewayName(), payType).pay(orderInfo);
         return payUrl;
     }
 

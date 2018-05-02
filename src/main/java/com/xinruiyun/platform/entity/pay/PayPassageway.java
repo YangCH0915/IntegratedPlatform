@@ -54,20 +54,20 @@ public class PayPassageway {
         this.id = id;
     }
 
-    public String getPassageName() {
+    public String getPassagewayName() {
         return passagewayName;
     }
 
-    public void setPassageName(String passageName) {
-        this.passagewayName = passageName;
+    public void setPassagewayName(String passagewayName) {
+        this.passagewayName = passagewayName;
     }
 
-    public String getPassageId() {
+    public String getPassagewayId() {
         return passagewayId;
     }
 
-    public void setPassageId(String passageId) {
-        this.passagewayId = passageId;
+    public void setPassagewayId(String passagewayId) {
+        this.passagewayId = passagewayId;
     }
 
     public String getEncryptionType() {

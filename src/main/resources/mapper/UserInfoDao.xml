@@ -28,13 +28,11 @@
         password=#{user.password},
         ua_name=#{user.uaName},
         user_jurisdiction=#{user.userJurisdiction},
-        founder=#{user.founder},
-        create_time=#{user.createTime},
         renewing=#{user.renewing},
         update_time=#{user.updateTime},
         callback_url=#{user.callbackUrl},
         notify_url=#{user.notifyUrl},
-        renewing=#{user.renewing}
+        remarks=#{user.remarks}
         where id = #{user.id}
     </update>
 
@@ -71,6 +69,8 @@
          create_time,
          renewing,
          update_time,
+         callback_url,
+         notify_url,
          remarks
     </sql>
 

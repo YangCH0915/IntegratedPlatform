@@ -1,6 +1,9 @@
 package com.xinruiyun.platform.service.pay;
 
+import com.xinruiyun.platform.dto.PagingQuery;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface PayPassagewayService {
@@ -15,7 +18,7 @@ public interface PayPassagewayService {
 
     PayPassageway queryPassagewayByPassagewayId(String passagewayId);
 
-    List<PayPassageway> queryPassagewayListByPage(int offset,int limit);
+    List<PayPassageway> queryPassagewayListByPage(PagingQuery pagingQuery);
 
     long queryPassagewayCount();
 }

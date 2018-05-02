@@ -190,7 +190,6 @@ public class ProductController {
     public void updateProduct(Product product,HttpServletResponse response){
         AuthResult<Product> authResult = null;
         try{
-            System.out.println("更新商品："+product.toString());
             product.setUpdateTime(new Date());
             productService.updateProduct(product);
             authResult = new AuthResult(StateEnum.SUCCESS,null);

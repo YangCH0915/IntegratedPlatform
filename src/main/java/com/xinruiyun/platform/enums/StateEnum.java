@@ -16,9 +16,15 @@ public enum StateEnum {
     REGISTER_USER_EXIST(2003, "用户名已存在"),
     QUERY_USER_EMPTY(3001, "用户列表为空"),
     QUERY_USER_ERROR(3002, "查询用户列表异常"),
-    ADD_PRODUCT_ERROR(1005,"添加商品异常"),
-    PRODUCT_LIST_NULL(1006,"没有添加商品"),
-    PRODUCT_LIST_ERROR(1007,"获取商品列表异常");
+    ADD_PRODUCT_ERROR(4001,"添加商品异常"),
+    PRODUCT_LIST_NULL(4002,"没有添加商品"),
+    PRODUCT_LIST_ERROR(4003,"获取商品列表异常"),
+    PASSAGEWAY_LIST_EMPTY(5001,"获取通道列表异常"),
+    QUERY_PASSAGEWAY_ERROR(5002,"查询通道失败"),
+    ADD_PASSAGEWAY_ERROR(5003,"添加通道失败"),
+    UPDATE_PASSAGEWAY_ERROR(5003,"更新通道失败"),
+    DELETE_PASSAGEWAY_ERROR(5003,"删除通道失败")
+    ;
 
     private int state;
 

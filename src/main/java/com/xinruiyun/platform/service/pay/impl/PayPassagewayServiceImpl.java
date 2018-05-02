@@ -1,6 +1,7 @@
 package com.xinruiyun.platform.service.pay.impl;
 
 import com.xinruiyun.platform.dao.pay.PayPassagewayDao;
+import com.xinruiyun.platform.dto.PagingQuery;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
 import com.xinruiyun.platform.service.pay.PayPassagewayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,16 @@ public class PayPassagewayServiceImpl implements PayPassagewayService {
     }
 
     @Override
-    public List<PayPassageway> queryPassagewayListByPage(int offset, int limit) {
-        return passagewayDao.queryPassagewayListByPage(offset,limit);
+    public List<PayPassageway> queryPassagewayListByPage(PagingQuery pagingQuery) {
+        int offset = (int) (pagingQuery.getTotalRecords() - (pagingQuery.getPageSize()*pagingQuery.getPageIndex()));
+        if(offset<0){
+            pagingQuery.setPageSize(pagingQuery.getPageSize()+offset);
+            offset = 0;
+            pagingQuery.setPageIndex(offset);
+        }else{
+            pagingQuery.setPageIndex(offset);
+        }
+        return passagewayDao.queryPassagewayListByPage(pagingQuery);
     }
 
     @Override

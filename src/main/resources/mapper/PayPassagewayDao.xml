@@ -45,7 +45,7 @@
     </select>
 
     <select id="queryPassagewayListByPage" resultType="com.xinruiyun.platform.entity.pay.PayPassageway">
-        select * from pay_passageway order by is_use desc limit #{offset},#{limit}
+        select * from pay_passageway order by is_use desc limit #{pq.pageIndex},#{pq.pageSize}
     </select>
 
     <select id="queryPassagewayCount" resultType="Long">

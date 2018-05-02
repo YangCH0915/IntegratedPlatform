@@ -42,6 +42,23 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int updateUserInfo(UserInfo userInfo) {
+        userInfo.setUpdateTime(new Date());
+        UserInfo ui = queryUserByUsername(userInfo.getUserName());
+        if(ui == null){
+            return -1;
+        }
+        Integer userJurisdiction = userInfo.getUserJurisdiction();
+        switch (userJurisdiction){
+            case Constants.JURI_SUPERADMIN:
+                userInfo.setHtml(Constants.HTML_SUPERADMIN);
+                break;
+            case Constants.JURI_OPERATOR:
+                userInfo.setHtml(Constants.HTML_OPERATOR);
+                break;
+            case Constants.JURI_DOWNSTREAM_CHANNEL:
+                userInfo.setHtml(Constants.HTML_DOWNSTREAM_CHANNEL);
+                break;
+        }
         return userInfoDao.updateUserInfo(userInfo);
     }
 

@@ -15,8 +15,8 @@ public class PayPassagewayDaoTest extends BaseTest{
     @Test
     public void addPassageway() {
         PayPassageway pp = new PayPassageway();
-        pp.setPassageName("华移");
-        pp.setPassageId("1002537");
+        pp.setPassagewayName("华移");
+        pp.setPassagewayId("1002537");
         pp.setPayType("wx_gzh");
         pp.setAppId("wx12564af456456");
         pp.setAppSecret("ajhjsdf456324156asdf");
@@ -38,8 +38,8 @@ public class PayPassagewayDaoTest extends BaseTest{
     public void updatePassageway() {
         PayPassageway pp = new PayPassageway();
         pp.setId(6);
-        pp.setPassageName("威富通");
-        pp.setPassageId("1002536");
+        pp.setPassagewayName("威富通");
+        pp.setPassagewayId("1002536");
         pp.setPayType("wx_gzh");
         pp.setAppId("wx12564af456456");
         pp.setAppSecret("1234567890123");
@@ -65,8 +65,8 @@ public class PayPassagewayDaoTest extends BaseTest{
 
     @Test
     public void queryPassagewayListByPage() {
-        List<PayPassageway> payPassageways = passagewayDao.queryPassagewayListByPage(0, 5);
-        System.out.println("查询结果："+payPassageways.toString());
+//        List<PayPassageway> payPassageways = passagewayDao.queryPassagewayListByPage();
+//        System.out.println("查询结果："+payPassageways.toString());
     }
 
     @Test

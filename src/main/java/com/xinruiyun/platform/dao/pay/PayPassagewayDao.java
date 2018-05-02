@@ -1,5 +1,6 @@
 package com.xinruiyun.platform.dao.pay;
 
+import com.xinruiyun.platform.dto.PagingQuery;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +18,7 @@ public interface PayPassagewayDao {
 
     PayPassageway queryPassagewayByPassagewayId(String passagewayId);
 
-    List<PayPassageway> queryPassagewayListByPage(@Param("offset") int offset, @Param("limit") int limit);
+    List<PayPassageway> queryPassagewayListByPage(@Param("pq") PagingQuery pagingQuery);
 
     long queryPassagewayCount();
 }
