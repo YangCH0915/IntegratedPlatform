@@ -16,6 +16,7 @@ public enum StateEnum {
     REGISTER_USER_EXIST(2003, "用户名已存在"),
     QUERY_USER_EMPTY(3001, "用户列表为空"),
     QUERY_USER_ERROR(3002, "查询用户列表异常"),
+    UPDATE_USER_FAIL(3003, "查询用户列表异常"),
     ADD_PRODUCT_ERROR(4001,"添加商品异常"),
     PRODUCT_LIST_NULL(4002,"没有添加商品"),
     PRODUCT_LIST_ERROR(4003,"获取商品列表异常"),

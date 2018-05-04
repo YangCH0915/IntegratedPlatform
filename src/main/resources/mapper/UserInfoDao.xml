@@ -15,11 +15,12 @@
             update_time,
             callback_url,
             notify_url,
+            state,
             remarks)
         values
             (#{user.userName},#{user.password},#{user.uaName},#{user.userJurisdiction},#{user.html},
             #{user.founder},#{user.createTime},#{user.renewing},#{user.updateTime},
-            #{user.callbackUrl},#{user.notifyUrl},#{user.remarks})
+            #{user.callbackUrl},#{user.notifyUrl},#{user.state},#{user.remarks})
     </insert>
 
     <update id="updateUserInfo">
@@ -32,6 +33,7 @@
         update_time=#{user.updateTime},
         callback_url=#{user.callbackUrl},
         notify_url=#{user.notifyUrl},
+        state=#{user.state},
         remarks=#{user.remarks}
         where id = #{user.id}
     </update>
@@ -64,6 +66,10 @@
          update user_info set password=#{password} where user_name=#{userName}
     </update>
 
+    <update id="updateState">
+        update user_info set state=#{state} where id=#{id}
+    </update>
+
     <sql id="userObject">
         select id,user_name,password,ua_name,user_jurisdiction,html,founder,
          create_time,
@@ -71,6 +77,7 @@
          update_time,
          callback_url,
          notify_url,
+         state,
          remarks
     </sql>
 

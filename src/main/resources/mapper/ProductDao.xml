@@ -12,10 +12,11 @@
             product_explain,
             founder,
             create_time,
+            request_url,
             is_enable)
         values
-            (#{p.productId},#{p.productName},#{p.productLogo},
-            #{p.productBg},#{p.productExplain},#{p.founder},#{p.createTime},#{p.isEnable})
+            (#{p.productId},#{p.productName},#{p.productLogo},#{p.productBg},
+            #{p.productExplain},#{p.founder},#{p.createTime},#{p.requestUrl},#{p.isEnable})
     </insert>
 
     <delete id="deleteProduct">
@@ -35,6 +36,7 @@
             product_explain=#{p.productExplain},
             renewing = #{p.renewing},
             update_time = #{p.updateTime},
+            request_url = #{p.requestUrl},
             is_enable=#{p.isEnable}
             where id = #{p.id}
     </update>

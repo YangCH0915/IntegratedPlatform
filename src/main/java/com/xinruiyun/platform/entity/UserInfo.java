@@ -67,6 +67,11 @@ public class UserInfo {
      */
     private String callbackUrl;
 
+    /**
+     * 使用状态
+     */
+    private int state;
+
     public Integer getId() {
         return id;
     }
@@ -172,6 +177,14 @@ public class UserInfo {
         this.callbackUrl = callbackUrl;
     }
 
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -188,6 +201,7 @@ public class UserInfo {
                 ", remarks='" + remarks + '\'' +
                 ", notifyUrl='" + notifyUrl + '\'' +
                 ", callbackUrl='" + callbackUrl + '\'' +
+                ", state=" + state +
                 '}';
     }
 }

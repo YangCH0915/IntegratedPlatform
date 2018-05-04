@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.xinruiyun.platform.dto.AuthResult;
 import com.xinruiyun.platform.dto.PagingQuery;
-import com.xinruiyun.platform.entity.UserInfo;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
 import com.xinruiyun.platform.enums.StateEnum;
 import com.xinruiyun.platform.service.pay.PayPassagewayService;

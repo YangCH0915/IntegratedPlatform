@@ -16,6 +16,7 @@ CREATE TABLE `user_info` (
 
 ALTER TABLE user_info ADD COLUMN `callback_url` VARCHAR(150) NULL AFTER `update_time`,
   ADD COLUMN `notify_url` VARCHAR(150) NULL AFTER `callback_url`;
+ALTER TABLE user_info ADD COLUMN `state` INT(11) DEFAULT 0 AFTER `remarks`;
 
 
 DROP TABLE IF EXISTS `product`;
@@ -33,6 +34,7 @@ CREATE TABLE `product` (
   `is_enable` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+ALTER TABLE product ADD COLUMN `request_url` VARCHAR(150) NULL AFTER `update_time`;
 
 DROP TABLE IF EXISTS `sub_product`;
 CREATE TABLE `sub_product` (

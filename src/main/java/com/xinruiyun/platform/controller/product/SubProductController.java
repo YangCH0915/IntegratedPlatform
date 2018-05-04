@@ -71,7 +71,7 @@ public class SubProductController {
     }
 
     @CrossOrigin(origins = Constants.CORS_URL)
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     public void getList(HttpServletResponse response){
         AuthResult<List<SubProduct>> authResult = null;
         try{

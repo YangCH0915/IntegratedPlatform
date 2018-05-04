@@ -14,6 +14,8 @@ public interface UserService {
 
     int deleteUserById(int id);
 
+    int updateState(int id,int state);
+
     int deleteUserByUsername(String userName);
 
     List<UserInfo> queryAllUserInfo();

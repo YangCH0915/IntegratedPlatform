@@ -14,6 +14,8 @@ public interface UserInfoDao {
 
     int deleteUserById(int id);
 
+    int updateState(@Param("id") int id,@Param("state") int state);
+
     int deleteUserByUsername(String userName);
 
     List<UserInfo> queryAllUserInfo();

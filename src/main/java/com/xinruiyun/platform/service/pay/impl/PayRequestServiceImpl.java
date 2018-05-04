@@ -1,16 +1,12 @@
 package com.xinruiyun.platform.service.pay.impl;
 
-import com.alibaba.fastjson.JSONObject;
-import com.xinruiyun.platform.dao.SubProductDao;
 import com.xinruiyun.platform.dao.pay.OrderInfoDao;
 import com.xinruiyun.platform.dao.pay.PayPassagewayDao;
-import com.xinruiyun.platform.dto.pay.PayInfo;
 import com.xinruiyun.platform.entity.SubProduct;
 import com.xinruiyun.platform.entity.UserInfo;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
 import com.xinruiyun.platform.paypassageway.PayPassagewayFactory;
-import com.xinruiyun.platform.paypassageway.SwifiH5Pay;
 import com.xinruiyun.platform.service.pay.PayRequestService;
 import com.xinruiyun.platform.service.product.SubProductService;
 import com.xinruiyun.platform.service.user.UserService;
@@ -19,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class PayRequestServiceImpl implements PayRequestService{

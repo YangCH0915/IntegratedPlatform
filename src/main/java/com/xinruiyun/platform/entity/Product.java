@@ -56,6 +56,10 @@ public class Product implements Serializable{
     private Date updateTime;
 
     /**
+     * 请求地址
+     */
+    private String requestUrl;
+    /**
      * 子商品列表
      */
     private List<SubProduct> subProducts;
@@ -154,6 +158,14 @@ public class Product implements Serializable{
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getRequestUrl() {
+        return requestUrl;
+    }
+
+    public void setRequestUrl(String requestUrl) {
+        this.requestUrl = requestUrl;
     }
 
     @Override

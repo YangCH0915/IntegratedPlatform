@@ -84,6 +84,26 @@ public class UserInfoController {
         }
     }
 
+    @RequestMapping(value = "/updateState",method = RequestMethod.POST)
+    public void updateState(HttpServletRequest request,HttpServletResponse response){
+        try {
+            AuthResult<Integer> authResult = null;
+            String id = request.getParameter("id");
+            String state = request.getParameter("state");
+            int i = userService.updateState(Tools.checkValue(id), Tools.checkValue(state));
+            if(i==1){
+                authResult = new AuthResult<>(StateEnum.SUCCESS,null);
+            }else{
+                authResult = new AuthResult<>(StateEnum.UPDATE_USER_FAIL,null);
+            }
+            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+                    SerializerFeature.WriteNullStringAsEmpty);
+            response.getWriter().write(json);
+        }catch (Exception e){
+
+        }
+    }
+
     @RequestMapping(value = "/count",method = RequestMethod.GET)
     public void getUserCount(HttpServletRequest request,HttpServletResponse response){
         String userName = request.getParameter("operator");

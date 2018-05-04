@@ -7,6 +7,10 @@ public class CompositeProduct {
 
     private int id;
     /**
+     * 产品ID
+     */
+    private String productId;
+    /**
      * 子产品ID
      */
     private String subProductId;
@@ -15,12 +19,26 @@ public class CompositeProduct {
      * 通道ID
      */
     private String passagewayId;
-
     /**
      * 渠道ID
      */
     private String channelId;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 
     public String getSubProductId() {
         return subProductId;
