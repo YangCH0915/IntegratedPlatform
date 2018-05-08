@@ -2,7 +2,7 @@ package com.xinruiyun.platform.controller.product;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.xinruiyun.platform.dto.AuthResult;
+import com.xinruiyun.platform.dto.ResponseResult;
 import com.xinruiyun.platform.entity.Product;
 import com.xinruiyun.platform.entity.SubProduct;
 import com.xinruiyun.platform.enums.StateEnum;
@@ -29,16 +29,16 @@ public class SubProductController {
     @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public void addProduct(SubProduct subProduct, HttpServletResponse response){
-        AuthResult<Product> authResult = null;
+        ResponseResult<Product> responseResult = null;
         try{
             subProductService.addSubProduct(subProduct);
-            authResult = new AuthResult(StateEnum.SUCCESS,null);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.SUCCESS,null);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         }catch(Exception e){
-            authResult = new AuthResult(StateEnum.ADD_PRODUCT_ERROR,null);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.ADD_PRODUCT_ERROR,null);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             try {
                 response.getWriter().write(json);
@@ -51,16 +51,16 @@ public class SubProductController {
     @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public void uploadPic( SubProduct subProduct,HttpServletResponse response){
-        AuthResult<SubProduct> authResult = null;
+        ResponseResult<SubProduct> responseResult = null;
         try{
             int i = subProductService.updateSubProduct(subProduct);
-            authResult = new AuthResult(StateEnum.SUCCESS,subProduct);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.SUCCESS,subProduct);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         }catch(Exception e){
-            authResult = new AuthResult(StateEnum.ADD_PRODUCT_ERROR,null);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.ADD_PRODUCT_ERROR,null);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             try {
                 response.getWriter().write(json);
@@ -73,23 +73,23 @@ public class SubProductController {
     @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public void getList(HttpServletResponse response){
-        AuthResult<List<SubProduct>> authResult = null;
+        ResponseResult<List<SubProduct>> responseResult = null;
         try{
             List<SubProduct> subProducts = subProductService.querySubProductList();
             if(subProducts != null){
-                authResult = new AuthResult<>(StateEnum.SUCCESS,subProducts);
-                String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+                responseResult = new ResponseResult<>(StateEnum.SUCCESS,subProducts);
+                String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                         SerializerFeature.WriteNullStringAsEmpty);
                 response.getWriter().write(json);
             }else{
-                authResult = new AuthResult(StateEnum.PRODUCT_LIST_NULL,null);
-                String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+                responseResult = new ResponseResult(StateEnum.PRODUCT_LIST_NULL,null);
+                String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                         SerializerFeature.WriteNullStringAsEmpty);
                 response.getWriter().write(json);
             }
         }catch(Exception e){
-            authResult = new AuthResult(StateEnum.PRODUCT_LIST_ERROR,null);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.PRODUCT_LIST_ERROR,null);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             try {
                 response.getWriter().write(json);
@@ -102,16 +102,16 @@ public class SubProductController {
     @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/count",method = RequestMethod.GET)
     public void getCount(HttpServletResponse response){
-        AuthResult<Long> authResult = null;
+        ResponseResult<Long> responseResult = null;
         try{
             long count = subProductService.querySubProductCount();
-                authResult = new AuthResult(StateEnum.SUCCESS,count);
-                String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+                responseResult = new ResponseResult(StateEnum.SUCCESS,count);
+                String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                         SerializerFeature.WriteNullStringAsEmpty);
                 response.getWriter().write(json);
         }catch(Exception e){
-            authResult = new AuthResult(StateEnum.PRODUCT_LIST_ERROR,null);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.PRODUCT_LIST_ERROR,null);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             try {
                 response.getWriter().write(json);
@@ -124,18 +124,18 @@ public class SubProductController {
     @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/getSubProductById",method = RequestMethod.GET)
     public void getSubProductById(HttpServletRequest request,HttpServletResponse response){
-        AuthResult<SubProduct> authResult = null;
+        ResponseResult<SubProduct> responseResult = null;
         String id = request.getParameter("id");
 
         try{
             SubProduct subProduct = subProductService.querySubProduct(Integer.valueOf(id));
-            authResult = new AuthResult(StateEnum.SUCCESS,subProduct);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.SUCCESS,subProduct);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         }catch(Exception e){
-            authResult = new AuthResult(StateEnum.PRODUCT_LIST_ERROR,null);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.PRODUCT_LIST_ERROR,null);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             try {
                 response.getWriter().write(json);
@@ -148,17 +148,17 @@ public class SubProductController {
     @CrossOrigin(origins = Constants.CORS_URL)
     @RequestMapping(value = "/deleteSubProductById",method = RequestMethod.GET)
     public void deleteSubProductById(HttpServletRequest request,HttpServletResponse response){
-        AuthResult<Integer> authResult = null;
+        ResponseResult<Integer> responseResult = null;
         String id = request.getParameter("id");
         try{
             int count = subProductService.deleteSubProduct(Integer.valueOf(id));
-            authResult = new AuthResult(StateEnum.SUCCESS,count);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.SUCCESS,count);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         }catch(Exception e){
-            authResult = new AuthResult(StateEnum.PRODUCT_LIST_ERROR,null);
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            responseResult = new ResponseResult(StateEnum.PRODUCT_LIST_ERROR,null);
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             try {
                 response.getWriter().write(json);

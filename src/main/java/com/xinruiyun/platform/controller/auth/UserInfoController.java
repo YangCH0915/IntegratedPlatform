@@ -2,7 +2,7 @@ package com.xinruiyun.platform.controller.auth;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.xinruiyun.platform.dto.AuthResult;
+import com.xinruiyun.platform.dto.ResponseResult;
 import com.xinruiyun.platform.dto.PagingQuery;
 import com.xinruiyun.platform.entity.UserInfo;
 import com.xinruiyun.platform.enums.StateEnum;
@@ -33,13 +33,13 @@ public class UserInfoController {
         String id = request.getParameter("id");
         try{
             UserInfo userInfo = userService.queryUserById(Tools.checkValue(id));
-            AuthResult<UserInfo> authResult = null;
+            ResponseResult<UserInfo> responseResult = null;
             if(userInfo != null){
-                authResult = new AuthResult<>(StateEnum.SUCCESS,userInfo);
+                responseResult = new ResponseResult<>(StateEnum.SUCCESS,userInfo);
             }else{
-                authResult = new AuthResult<>(StateEnum.QUERY_USER_EMPTY,null);
+                responseResult = new ResponseResult<>(StateEnum.QUERY_USER_EMPTY,null);
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         }catch (Exception e){
@@ -52,13 +52,13 @@ public class UserInfoController {
         String id = request.getParameter("id");
         try{
             int i = userService.deleteUserById(Tools.checkValue(id));
-            AuthResult<UserInfo> authResult = null;
+            ResponseResult<UserInfo> responseResult = null;
             if(i == 1){
-                authResult = new AuthResult<>(StateEnum.SUCCESS,null);
+                responseResult = new ResponseResult<>(StateEnum.SUCCESS,null);
             }else{
-                authResult = new AuthResult<>(StateEnum.QUERY_USER_EMPTY,null);
+                responseResult = new ResponseResult<>(StateEnum.QUERY_USER_EMPTY,null);
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         }catch (Exception e){
@@ -70,13 +70,13 @@ public class UserInfoController {
     public void update(UserInfo userInfo,HttpServletResponse response){
         try {
             int i = userService.updateUserInfo(userInfo);
-            AuthResult<Integer> authResult = null;
+            ResponseResult<Integer> responseResult = null;
             if(i == 1){
-                authResult = new AuthResult<>(StateEnum.SUCCESS,null);
+                responseResult = new ResponseResult<>(StateEnum.SUCCESS,null);
             }else{
-                authResult = new AuthResult<>(StateEnum.QUERY_USER_EMPTY,null);
+                responseResult = new ResponseResult<>(StateEnum.QUERY_USER_EMPTY,null);
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         }catch (Exception e){
@@ -87,16 +87,16 @@ public class UserInfoController {
     @RequestMapping(value = "/updateState",method = RequestMethod.POST)
     public void updateState(HttpServletRequest request,HttpServletResponse response){
         try {
-            AuthResult<Integer> authResult = null;
+            ResponseResult<Integer> responseResult = null;
             String id = request.getParameter("id");
             String state = request.getParameter("state");
             int i = userService.updateState(Tools.checkValue(id), Tools.checkValue(state));
             if(i==1){
-                authResult = new AuthResult<>(StateEnum.SUCCESS,null);
+                responseResult = new ResponseResult<>(StateEnum.SUCCESS,null);
             }else{
-                authResult = new AuthResult<>(StateEnum.UPDATE_USER_FAIL,null);
+                responseResult = new ResponseResult<>(StateEnum.UPDATE_USER_FAIL,null);
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         }catch (Exception e){
@@ -107,15 +107,15 @@ public class UserInfoController {
     @RequestMapping(value = "/count",method = RequestMethod.GET)
     public void getUserCount(HttpServletRequest request,HttpServletResponse response){
         String userName = request.getParameter("operator");
-        AuthResult<Long> authResult = null;
+        ResponseResult<Long> responseResult = null;
         long userCount = userService.queryAllCount(userName);
         try {
             if(userCount>0){
-                authResult = new AuthResult<>(StateEnum.SUCCESS,userCount);
+                responseResult = new ResponseResult<>(StateEnum.SUCCESS,userCount);
             }else{
-                authResult = new AuthResult<>(StateEnum.QUERY_USER_EMPTY,null);
+                responseResult = new ResponseResult<>(StateEnum.QUERY_USER_EMPTY,null);
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         } catch (IOException e) {

@@ -2,7 +2,7 @@ package com.xinruiyun.platform.controller.auth;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.xinruiyun.platform.dto.AuthResult;
+import com.xinruiyun.platform.dto.ResponseResult;
 import com.xinruiyun.platform.entity.UserInfo;
 import com.xinruiyun.platform.enums.StateEnum;
 import com.xinruiyun.platform.service.user.UserService;
@@ -31,20 +31,20 @@ public class UserAuthController {
 
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        AuthResult<String> authResult = null;
+        ResponseResult<String> responseResult = null;
         if (userName.equals("YC2018")&&password.equals("654321")){
-            authResult =  new AuthResult<>(StateEnum.SUCCESS,Constants.HTML_SUPERADMIN);
+            responseResult =  new ResponseResult<>(StateEnum.SUCCESS,Constants.HTML_SUPERADMIN);
         }else {
             UserInfo userInfo = userService.queryUserByUsername(userName);
             if(userInfo == null){
-                authResult = new AuthResult<>(StateEnum.LOGIN_USER_ERROR,null);
+                responseResult = new ResponseResult<>(StateEnum.LOGIN_USER_ERROR,null);
             }else if(!password.equals(userInfo.getPassword())){
-                authResult = new AuthResult<>(StateEnum.LOGIN_PASSWORD_ERROR,null);
+                responseResult = new ResponseResult<>(StateEnum.LOGIN_PASSWORD_ERROR,null);
             }else{
-                authResult =  new AuthResult<>(StateEnum.SUCCESS,userInfo.getHtml());
+                responseResult =  new ResponseResult<>(StateEnum.SUCCESS,userInfo.getHtml());
             }
         }
-        String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+        String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteNullStringAsEmpty);
         response.getWriter().write(json);
     }
@@ -52,20 +52,20 @@ public class UserAuthController {
     @RequestMapping(value = "register",method = RequestMethod.POST)
     public void register(UserInfo userInfo,HttpServletResponse response){
         try{
-            AuthResult authResult = null;
+            ResponseResult responseResult = null;
             if(userInfo == null){
-                authResult =  new AuthResult<>(StateEnum.REGISTER_ERROR,null);
+                responseResult =  new ResponseResult<>(StateEnum.REGISTER_ERROR,null);
             }else{
                 int i = userService.addUserInfo(userInfo);
                 if(i == 1){
-                    authResult =  new AuthResult<>(StateEnum.SUCCESS,userInfo);
+                    responseResult =  new ResponseResult<>(StateEnum.SUCCESS,userInfo);
                 }else if(i == -1){
-                    authResult = new AuthResult<>(StateEnum.REGISTER_USER_EXIST,null);
+                    responseResult = new ResponseResult<>(StateEnum.REGISTER_USER_EXIST,null);
                 }else{
-                    authResult = new AuthResult<>(StateEnum.REGISTER_FAIL,null);
+                    responseResult = new ResponseResult<>(StateEnum.REGISTER_FAIL,null);
                 }
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         }catch (IOException e){

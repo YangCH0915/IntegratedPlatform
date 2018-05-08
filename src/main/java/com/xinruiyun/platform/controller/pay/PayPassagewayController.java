@@ -2,7 +2,7 @@ package com.xinruiyun.platform.controller.pay;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.xinruiyun.platform.dto.AuthResult;
+import com.xinruiyun.platform.dto.ResponseResult;
 import com.xinruiyun.platform.dto.PagingQuery;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
 import com.xinruiyun.platform.enums.StateEnum;
@@ -33,18 +33,18 @@ public class PayPassagewayController {
     public void addPassageway(PayPassageway payPassageway, HttpServletResponse response) {
 
         try {
-            AuthResult authResult = null;
+            ResponseResult responseResult = null;
             if (payPassageway == null) {
-                authResult = new AuthResult<>(StateEnum.REGISTER_ERROR, null);
+                responseResult = new ResponseResult<>(StateEnum.REGISTER_ERROR, null);
             } else {
                 int i = payPassagewayService.addPassageway(payPassageway);
                 if (i == 1) {
-                    authResult = new AuthResult<>(StateEnum.SUCCESS, i);
+                    responseResult = new ResponseResult<>(StateEnum.SUCCESS, i);
                 } else {
-                    authResult = new AuthResult<>(StateEnum.ADD_PASSAGEWAY_ERROR, null);
+                    responseResult = new ResponseResult<>(StateEnum.ADD_PASSAGEWAY_ERROR, null);
                 }
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         } catch (IOException e) {
@@ -55,18 +55,18 @@ public class PayPassagewayController {
     @RequestMapping(value = "update", method = RequestMethod.POST)
     public void updatePassageway(PayPassageway payPassageway, HttpServletResponse response) {
         try {
-            AuthResult authResult = null;
+            ResponseResult responseResult = null;
             if (payPassageway == null) {
-                authResult = new AuthResult<>(StateEnum.REGISTER_ERROR, null);
+                responseResult = new ResponseResult<>(StateEnum.REGISTER_ERROR, null);
             } else {
                 int i = payPassagewayService.updatePassageway(payPassageway);
                 if (i == 1) {
-                    authResult = new AuthResult<>(StateEnum.SUCCESS, i);
+                    responseResult = new ResponseResult<>(StateEnum.SUCCESS, i);
                 } else {
-                    authResult = new AuthResult<>(StateEnum.UPDATE_PASSAGEWAY_ERROR, null);
+                    responseResult = new ResponseResult<>(StateEnum.UPDATE_PASSAGEWAY_ERROR, null);
                 }
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         } catch (IOException e) {
@@ -78,14 +78,14 @@ public class PayPassagewayController {
     public void deletePassageway(HttpServletRequest request, HttpServletResponse response) {
         try {
             String id = request.getParameter("id");
-            AuthResult authResult = null;
+            ResponseResult responseResult = null;
             int i = payPassagewayService.deletePassageway(Tools.checkValue(id));
             if (i == 1) {
-                authResult = new AuthResult<>(StateEnum.SUCCESS, i);
+                responseResult = new ResponseResult<>(StateEnum.SUCCESS, i);
             } else {
-                authResult = new AuthResult<>(StateEnum.DELETE_PASSAGEWAY_ERROR, null);
+                responseResult = new ResponseResult<>(StateEnum.DELETE_PASSAGEWAY_ERROR, null);
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         } catch (IOException e) {
@@ -97,14 +97,14 @@ public class PayPassagewayController {
     public void queryPassagewayById(HttpServletRequest request, HttpServletResponse response) {
         try {
             String id = request.getParameter("id");
-            AuthResult authResult = null;
+            ResponseResult responseResult = null;
             PayPassageway payPassageway = payPassagewayService.queryPassagewayById(Tools.checkValue(id));
             if (payPassageway != null) {
-                authResult = new AuthResult<>(StateEnum.SUCCESS, payPassageway);
+                responseResult = new ResponseResult<>(StateEnum.SUCCESS, payPassageway);
             } else {
-                authResult = new AuthResult<>(StateEnum.QUERY_PASSAGEWAY_ERROR, null);
+                responseResult = new ResponseResult<>(StateEnum.QUERY_PASSAGEWAY_ERROR, null);
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         } catch (IOException e) {
@@ -136,15 +136,15 @@ public class PayPassagewayController {
 
     @RequestMapping(value = "count", method = RequestMethod.GET)
     public void queryPassagewayCount(HttpServletRequest request, HttpServletResponse response) {
-        AuthResult<Long> authResult = null;
+        ResponseResult<Long> responseResult = null;
         long userCount = payPassagewayService.queryPassagewayCount();
         try {
             if(userCount>0){
-                authResult = new AuthResult<>(StateEnum.SUCCESS,userCount);
+                responseResult = new ResponseResult<>(StateEnum.SUCCESS,userCount);
             }else{
-                authResult = new AuthResult<>(StateEnum.PASSAGEWAY_LIST_EMPTY,null);
+                responseResult = new ResponseResult<>(StateEnum.PASSAGEWAY_LIST_EMPTY,null);
             }
-            String json = JSONObject.toJSONString(authResult, SerializerFeature.WriteMapNullValue,
+            String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                     SerializerFeature.WriteNullStringAsEmpty);
             response.getWriter().write(json);
         } catch (IOException e) {

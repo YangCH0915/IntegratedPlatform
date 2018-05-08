@@ -2,13 +2,13 @@ package com.xinruiyun.platform.dto;
 
 import com.xinruiyun.platform.enums.StateEnum;
 
-public class AuthResult<T> {
+public class ResponseResult<T> {
 
     private int state;
     private T data;
     private String msg;
 
-    public AuthResult(StateEnum stateEnum, T data) {
+    public ResponseResult(StateEnum stateEnum, T data) {
         this.state = stateEnum.getState();
         this.data = data;
         this.msg = stateEnum.getStateInfo();
@@ -40,7 +40,7 @@ public class AuthResult<T> {
 
     @Override
     public String toString() {
-        return "AuthResult{" +
+        return "ResponseResult{" +
                 "state=" + state +
                 ", data=" + data +
                 ", msg='" + msg + '\'' +
