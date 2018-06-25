@@ -21,5 +21,5 @@ public class Log {
 	public static void e(@SuppressWarnings("rawtypes") Class c,String msg){
 		getLogger(c).error(msg);
 	}
-	
+
 }

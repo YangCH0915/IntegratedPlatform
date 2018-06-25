@@ -126,7 +126,6 @@ public class SubProductController {
     public void getSubProductById(HttpServletRequest request,HttpServletResponse response){
         ResponseResult<SubProduct> responseResult = null;
         String id = request.getParameter("id");
-
         try{
             SubProduct subProduct = subProductService.querySubProduct(Integer.valueOf(id));
             responseResult = new ResponseResult(StateEnum.SUCCESS,subProduct);

@@ -10,7 +10,7 @@ public class Constants {
     /**
      * 跨域访问地址
      */
-    public static final String CORS_URL = "http://192.168.1.128:8020";
+    public static final String CORS_URL = "http://192.168.1.154:8020";
 
     public static final String HTML_SUPERADMIN = "index.html";
     public static final String HTML_OPERATOR = "index.html";
