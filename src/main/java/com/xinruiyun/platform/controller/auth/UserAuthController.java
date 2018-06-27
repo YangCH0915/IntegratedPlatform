@@ -19,16 +19,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/auth")
+@RequestMapping("")
 @CrossOrigin(origins = Constants.CORS_URL)
 public class UserAuthController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "login",method = RequestMethod.POST)
-    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/index")
+    public String index(){
+        return "auth/login";
+    }
 
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
         ResponseResult<String> responseResult = null;
@@ -49,7 +53,7 @@ public class UserAuthController {
         response.getWriter().write(json);
     }
 
-    @RequestMapping(value = "register",method = RequestMethod.POST)
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     public void register(UserInfo userInfo,HttpServletResponse response){
         try{
             ResponseResult responseResult = null;

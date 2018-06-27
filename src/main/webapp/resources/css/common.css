@@ -1,0 +1,5 @@
+.uploadImg{display:inline-block;position:relative;border:1px #139667 solid;}
+.uploadImg input{display:none;}
+.uploadImg span{display:block;font-size:12px;text-align:center;color:#139667;}
+.uploadImg span:hover{color:#209f71;}
+.uploadImg span:before{content:"";font-family:'adminthemesregular';display:block;font-size:40px;}
