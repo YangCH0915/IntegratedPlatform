@@ -3,7 +3,10 @@ package com.xinruiyun.platform.http;
 import com.xinruiyun.platform.utils.Log;
 import okhttp3.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -184,5 +187,48 @@ public class OkHttpManager {
             e.printStackTrace();
         }
         return "";
+    }
+
+    /**
+     * 下载文件
+     * @param url
+     * @param fileDir
+     * @param fileName
+     */
+    public void downFile(String url, final String fileDir, final String fileName) {
+        Request request = new Request.Builder().url(url).build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                InputStream is = null;
+                byte[] buf = new byte[2048];
+                int len = 0;
+                FileOutputStream fos = null;
+                try {
+                    is = response.body().byteStream();
+                    File file = new File(fileDir);
+                    if(!file.exists()){
+                        file.mkdirs();
+                    }
+                    file = new File(file.getAbsolutePath(), fileName);
+                    fos = new FileOutputStream(file);
+                    while ((len = is.read(buf)) != -1) {
+                        fos.write(buf, 0, len);
+                    }
+                    fos.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (is != null) is.close();
+                    if (fos != null) fos.close();
+                }
+            }
+        });
     }
 }

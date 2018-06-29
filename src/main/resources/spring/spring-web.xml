@@ -52,5 +52,5 @@
         <property name="maxUploadSize" value="1000000000" />
     </bean>
 
-	<mvc:view-controller path="/" view-name="redirect:/auth/index" />
+	<mvc:view-controller path="/" view-name="redirect:/index" />
 </beans>
