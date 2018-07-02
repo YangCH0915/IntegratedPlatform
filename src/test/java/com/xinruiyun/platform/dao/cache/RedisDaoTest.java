@@ -1,16 +1,12 @@
 package com.xinruiyun.platform.dao.cache;
 
 import com.xinruiyun.platform.BaseTest;
-import com.xinruiyun.platform.entity.Product;
+import com.xinruiyun.platform.entity.product.Product;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class RedisDaoTest extends BaseTest{
 

@@ -3,7 +3,7 @@ package com.xinruiyun.platform.controller.auth;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.xinruiyun.platform.dto.ResponseResult;
-import com.xinruiyun.platform.entity.UserInfo;
+import com.xinruiyun.platform.entity.user.UserInfo;
 import com.xinruiyun.platform.enums.StateEnum;
 import com.xinruiyun.platform.service.user.UserService;
 import com.xinruiyun.platform.utils.Constants;
@@ -32,12 +32,14 @@ public class UserAuthController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
+        System.out.println("账号："+userName+"---->密码："+password);
         ResponseResult<String> responseResult = null;
         if (userName.equals("YC2018")&&password.equals("654321")){
             responseResult =  new ResponseResult<>(StateEnum.SUCCESS,Constants.HTML_SUPERADMIN);
+            return "main/index";
         }else {
             UserInfo userInfo = userService.queryUserByUsername(userName);
             if(userInfo == null){
@@ -51,6 +53,7 @@ public class UserAuthController {
         String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteNullStringAsEmpty);
         response.getWriter().write(json);
+        return "";
     }
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
@@ -76,5 +79,4 @@ public class UserAuthController {
             Log.i(getClass(),"register exception"+e.getMessage());
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package com.xinruiyun.platform.entity;
+package com.xinruiyun.platform.entity.product;
 
 import java.io.Serializable;
 import java.util.Date;

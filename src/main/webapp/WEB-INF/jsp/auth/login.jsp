@@ -25,14 +25,14 @@
                 <div class="lg-box">
                     <div class="lg-label">
                         <h4>用户登录</h4></div>
-                    <form>
+                    <form action="/login" method="post">
                         <div class="lg-username input-item clearfix">
                             <i class="iconfont">&#xe60d;</i>
-                            <input type="text" id="username" placeholder="账号/邮箱">
+                            <input type="text" id="username" name="username" placeholder="账号/邮箱">
                         </div>
                         <div class="lg-password input-item clearfix">
                             <i class="iconfont">&#xe634;</i>
-                            <input type="password" id="password" placeholder="请输入密码">
+                            <input type="password" id="password" name="password" placeholder="请输入密码">
                         </div>
                         <div class="lg-check clearfix">
                             <div class="input-item">
@@ -47,7 +47,7 @@
                         </div>
                         <div class="enter">
                             <!--<a href="javascript:;" class="purchaser" onClick="javascript:window.location='main.html'">确认登录</a>-->
-                            <a class="supplier" id="login">确认登录</a>
+                            <button type="submit" class="supplier">确认登录</button>
                         </div>
                     </form>
                 </div>

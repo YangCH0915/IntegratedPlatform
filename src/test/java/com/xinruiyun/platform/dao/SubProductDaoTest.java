@@ -1,7 +1,8 @@
 package com.xinruiyun.platform.dao;
 
 import com.xinruiyun.platform.BaseTest;
-import com.xinruiyun.platform.entity.SubProduct;
+import com.xinruiyun.platform.dao.product.SubProductDao;
+import com.xinruiyun.platform.entity.product.SubProduct;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

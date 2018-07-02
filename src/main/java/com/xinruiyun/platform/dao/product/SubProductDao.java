@@ -1,6 +1,6 @@
-package com.xinruiyun.platform.dao;
+package com.xinruiyun.platform.dao.product;
 
-import com.xinruiyun.platform.entity.SubProduct;
+import com.xinruiyun.platform.entity.product.SubProduct;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

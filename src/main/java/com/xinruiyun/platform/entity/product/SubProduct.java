@@ -1,4 +1,4 @@
-package com.xinruiyun.platform.entity;
+package com.xinruiyun.platform.entity.product;
 
 /**
  * 子产品分类

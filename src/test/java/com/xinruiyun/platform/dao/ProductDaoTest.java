@@ -1,15 +1,14 @@
 package com.xinruiyun.platform.dao;
 
 import com.xinruiyun.platform.BaseTest;
-import com.xinruiyun.platform.entity.Product;
+import com.xinruiyun.platform.dao.product.ProductDao;
+import com.xinruiyun.platform.entity.product.Product;
 import org.junit.Test;
 
 import javax.annotation.Resource;
 
 import java.util.Date;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class ProductDaoTest extends BaseTest{
 

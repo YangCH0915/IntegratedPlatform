@@ -56,4 +56,7 @@
 
 	<!-- 导入redis的配置文件 -->
 	<import resource="spring-redis.xml"></import>
+
+	<!-- 导入shiro的配置文件 -->
+	<import resource="spring-shiro.xml"></import>
 </beans>

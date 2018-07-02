@@ -1,14 +1,13 @@
 package com.xinruiyun.platform.dao;
 
 import com.xinruiyun.platform.BaseTest;
+import com.xinruiyun.platform.dao.user.UserInfoDao;
 import com.xinruiyun.platform.dto.PagingQuery;
-import com.xinruiyun.platform.entity.UserInfo;
+import com.xinruiyun.platform.entity.user.UserInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class UserInfoDaoTest extends BaseTest{
 

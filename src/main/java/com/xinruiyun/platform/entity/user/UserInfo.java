@@ -1,14 +1,12 @@
-package com.xinruiyun.platform.entity;
+package com.xinruiyun.platform.entity.user;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.xinruiyun.platform.utils.Tools;
 
 import java.util.Date;
 
 public class UserInfo {
 
-    private Integer id;
+    private long id;
     /**
      * 中文名
      */
@@ -72,11 +70,11 @@ public class UserInfo {
      */
     private int state;
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.xinruiyun.platform.dto.ResponseResult;
 import com.xinruiyun.platform.dto.PagingQuery;
-import com.xinruiyun.platform.entity.UserInfo;
+import com.xinruiyun.platform.entity.user.UserInfo;
 import com.xinruiyun.platform.enums.StateEnum;
 import com.xinruiyun.platform.service.user.UserService;
 import com.xinruiyun.platform.utils.Constants;

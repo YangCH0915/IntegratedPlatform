@@ -1,6 +1,6 @@
 package com.xinruiyun.platform.service.product;
 
-import com.xinruiyun.platform.entity.Product;
+import com.xinruiyun.platform.entity.product.Product;
 
 import java.util.List;
 

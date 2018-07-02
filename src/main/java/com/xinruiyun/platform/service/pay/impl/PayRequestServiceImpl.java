@@ -2,8 +2,8 @@ package com.xinruiyun.platform.service.pay.impl;
 
 import com.xinruiyun.platform.dao.pay.OrderInfoDao;
 import com.xinruiyun.platform.dao.pay.PayPassagewayDao;
-import com.xinruiyun.platform.entity.SubProduct;
-import com.xinruiyun.platform.entity.UserInfo;
+import com.xinruiyun.platform.entity.product.SubProduct;
+import com.xinruiyun.platform.entity.user.UserInfo;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
 import com.xinruiyun.platform.entity.pay.PayPassageway;
 import com.xinruiyun.platform.paypassageway.PayPassagewayFactory;

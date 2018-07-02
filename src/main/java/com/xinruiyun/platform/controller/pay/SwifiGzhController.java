@@ -5,16 +5,13 @@ import com.xinruiyun.platform.dao.pay.OrderInfoDao;
 import com.xinruiyun.platform.entity.pay.OrderInfo;
 import com.xinruiyun.platform.http.OkHttpManager;
 import com.xinruiyun.platform.paypassageway.SwifiGzhPay;
-import com.xinruiyun.platform.utils.Constants;
 import com.xinruiyun.platform.utils.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/gzh")
@@ -58,7 +55,7 @@ public class SwifiGzhController {
                 model.addAttribute("sign", json.getString("paySign"));
                 model.addAttribute("callbackUrl", json.getString("callback_url"));
             }
-            return "/jsapi";
+            return "pay/wx_jsapi";
         } catch (Exception e) {
             Log.i(this.getClass(), "异常：" + e.toString());
         }

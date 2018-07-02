@@ -1,7 +1,7 @@
-package com.xinruiyun.platform.dao;
+package com.xinruiyun.platform.dao.user;
 
 import com.xinruiyun.platform.dto.PagingQuery;
-import com.xinruiyun.platform.entity.UserInfo;
+import com.xinruiyun.platform.entity.user.UserInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.xinruiyun.platform.service.product.impl;
 
-import com.xinruiyun.platform.dao.SubProductDao;
-import com.xinruiyun.platform.entity.SubProduct;
+import com.xinruiyun.platform.dao.product.SubProductDao;
+import com.xinruiyun.platform.entity.product.SubProduct;
 import com.xinruiyun.platform.service.product.SubProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

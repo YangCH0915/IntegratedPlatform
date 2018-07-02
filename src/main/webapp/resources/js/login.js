@@ -6,7 +6,7 @@ layui.use('layer', function() {
 		var userName = $('#username').val();
 		var password = $('#password').val();
 		if(validate()) {
-			var url = 'auth/login';
+			var url = '/login';
 			$.ajax(url,{
 				type: 'POST',
 				dataType: 'json',
@@ -28,7 +28,6 @@ layui.use('layer', function() {
 					}
 				}
 			});
-
 		}
 	});
 });

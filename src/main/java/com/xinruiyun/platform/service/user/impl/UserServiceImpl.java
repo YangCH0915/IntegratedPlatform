@@ -1,11 +1,10 @@
 package com.xinruiyun.platform.service.user.impl;
 
-import com.xinruiyun.platform.dao.UserInfoDao;
+import com.xinruiyun.platform.dao.user.UserInfoDao;
 import com.xinruiyun.platform.dto.PagingQuery;
-import com.xinruiyun.platform.entity.UserInfo;
+import com.xinruiyun.platform.entity.user.UserInfo;
 import com.xinruiyun.platform.service.user.UserService;
 import com.xinruiyun.platform.utils.Constants;
-import com.xinruiyun.platform.utils.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

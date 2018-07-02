@@ -1,12 +1,10 @@
 package com.xinruiyun.platform.service.product.impl;
 
 import com.xinruiyun.platform.BaseTest;
-import com.xinruiyun.platform.entity.Product;
+import com.xinruiyun.platform.entity.product.Product;
 import com.xinruiyun.platform.service.product.ProductService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.Assert.*;
 
 public class ProductServiceImplTest extends BaseTest{
 

@@ -3,7 +3,7 @@ package com.xinruiyun.platform.controller.product;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.xinruiyun.platform.dto.ResponseResult;
-import com.xinruiyun.platform.entity.Product;
+import com.xinruiyun.platform.entity.product.Product;
 import com.xinruiyun.platform.enums.StateEnum;
 import com.xinruiyun.platform.service.product.ProductService;
 import com.xinruiyun.platform.utils.Constants;
