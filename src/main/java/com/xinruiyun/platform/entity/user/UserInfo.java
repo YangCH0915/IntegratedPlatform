@@ -20,18 +20,6 @@ public class UserInfo {
      */
     private String password;
     /**
-     * 用户权限
-     * 0  超级管理员
-     * 1  运营人员
-     * 2  普通用户
-     * 3  下游渠道
-     */
-    private Integer userJurisdiction;
-    /**
-     * 账号对应的网页
-     */
-    private String html;
-    /**
      * 创建人
      */
     private String founder;
@@ -54,17 +42,14 @@ public class UserInfo {
      * 备注
      */
     private String remarks;
-
     /**
      * 异步回调地址
      */
     private String notifyUrl;
-
     /**
      * 前端回调地址
      */
     private String callbackUrl;
-
     /**
      * 使用状态
      */
@@ -100,22 +85,6 @@ public class UserInfo {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Integer getUserJurisdiction() {
-        return userJurisdiction;
-    }
-
-    public void setUserJurisdiction(Integer userJurisdiction) {
-        this.userJurisdiction = userJurisdiction;
-    }
-
-    public String getHtml() {
-        return html;
-    }
-
-    public void setHtml(String html) {
-        this.html = html;
     }
 
     public String getFounder() {
@@ -190,8 +159,6 @@ public class UserInfo {
                 ", uaName='" + uaName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", userJurisdiction=" + userJurisdiction +
-                ", html='" + html + '\'' +
                 ", founder='" + founder + '\'' +
                 ", createTime=" + createTime +
                 ", renewing='" + renewing + '\'' +

@@ -12,13 +12,11 @@ public interface RoleDao {
 
     int updateRole(@Param("role") Role role);
 
-    int deleteRolebyId(long id);
-
-    int deleteUserByName(String name);
+    int deleteRoleById(int id);
 
     List<Role> queryAllRole();
 
-    Role queryRoleById(long id);
+    Role queryRoleById(int id);
 
     Role queryRoleByName(String name);
 

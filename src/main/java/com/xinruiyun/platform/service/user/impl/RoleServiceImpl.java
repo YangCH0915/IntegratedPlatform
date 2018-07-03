@@ -5,9 +5,11 @@ import com.xinruiyun.platform.dto.PagingQuery;
 import com.xinruiyun.platform.entity.user.Role;
 import com.xinruiyun.platform.service.user.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
@@ -24,13 +26,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public int deleteRoleById(long id) {
-        return roleDao.deleteRolebyId(id);
-    }
-
-    @Override
-    public int deleteUserByName(String name) {
-        return roleDao.deleteUserByName(name);
+    public int deleteRoleById(int id) {
+        return roleDao.deleteRoleById(id);
     }
 
     @Override
@@ -39,7 +36,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role queryRoleById(long id) {
+    public Role queryRoleById(int id) {
         return roleDao.queryRoleById(id);
     }
 

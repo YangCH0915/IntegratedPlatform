@@ -35,7 +35,6 @@ public class UserAuthController {
     public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println("账号："+userName+"---->密码："+password);
         ResponseResult<String> responseResult = null;
         if (userName.equals("YC2018")&&password.equals("654321")){
             responseResult =  new ResponseResult<>(StateEnum.SUCCESS,Constants.HTML_SUPERADMIN);
@@ -47,7 +46,7 @@ public class UserAuthController {
             }else if(!password.equals(userInfo.getPassword())){
                 responseResult = new ResponseResult<>(StateEnum.LOGIN_PASSWORD_ERROR,null);
             }else{
-                responseResult =  new ResponseResult<>(StateEnum.SUCCESS,userInfo.getHtml());
+                responseResult =  new ResponseResult<>(StateEnum.SUCCESS,null);
             }
         }
         String json = JSONObject.toJSONString(responseResult, SerializerFeature.WriteMapNullValue,

@@ -1,6 +1,7 @@
 package com.xinruiyun.platform.dao.user;
 
 import com.xinruiyun.platform.dto.PagingQuery;
+import com.xinruiyun.platform.dto.URole;
 import com.xinruiyun.platform.entity.user.UserInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,10 +23,10 @@ public interface UserInfoDao {
 
     /**
      * 查询某个权限的用户
-     * @param jurisdiction
+     * @param id
      * @return
      */
-    List<UserInfo> queryUserByJurisdiction(int jurisdiction);
+    List<URole> queryRoleByUserId(long id);
 
     /**
      * 根据id查询

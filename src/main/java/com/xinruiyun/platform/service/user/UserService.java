@@ -1,6 +1,7 @@
 package com.xinruiyun.platform.service.user;
 
 import com.xinruiyun.platform.dto.PagingQuery;
+import com.xinruiyun.platform.dto.URole;
 import com.xinruiyun.platform.entity.user.UserInfo;
 
 import java.util.List;
@@ -21,10 +22,10 @@ public interface UserService {
 
     /**
      * 查询某个权限的用户
-     * @param jurisdiction
+     * @param id
      * @return
      */
-    List<UserInfo> queryUserByJurisdiction(int jurisdiction);
+    List<URole> queryRoleByUserId(long id);
 
     /**
      * 根据id查询

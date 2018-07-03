@@ -2,9 +2,9 @@ package com.xinruiyun.platform.service.user.impl;
 
 import com.xinruiyun.platform.dao.user.UserInfoDao;
 import com.xinruiyun.platform.dto.PagingQuery;
+import com.xinruiyun.platform.dto.URole;
 import com.xinruiyun.platform.entity.user.UserInfo;
 import com.xinruiyun.platform.service.user.UserService;
-import com.xinruiyun.platform.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,18 +24,6 @@ public class UserServiceImpl implements UserService{
         if(ui != null){
             return -1;
         }
-        Integer userJurisdiction = userInfo.getUserJurisdiction();
-        switch (userJurisdiction){
-            case Constants.JURI_SUPERADMIN:
-                userInfo.setHtml(Constants.HTML_SUPERADMIN);
-                break;
-            case Constants.JURI_OPERATOR:
-                userInfo.setHtml(Constants.HTML_OPERATOR);
-                break;
-            case Constants.JURI_DOWNSTREAM_CHANNEL:
-                userInfo.setHtml(Constants.HTML_DOWNSTREAM_CHANNEL);
-                break;
-        }
         return userInfoDao.addUserInfo(userInfo);
     }
 
@@ -45,18 +33,6 @@ public class UserServiceImpl implements UserService{
         UserInfo ui = queryUserByUsername(userInfo.getUserName());
         if(ui == null){
             return -1;
-        }
-        Integer userJurisdiction = userInfo.getUserJurisdiction();
-        switch (userJurisdiction){
-            case Constants.JURI_SUPERADMIN:
-                userInfo.setHtml(Constants.HTML_SUPERADMIN);
-                break;
-            case Constants.JURI_OPERATOR:
-                userInfo.setHtml(Constants.HTML_OPERATOR);
-                break;
-            case Constants.JURI_DOWNSTREAM_CHANNEL:
-                userInfo.setHtml(Constants.HTML_DOWNSTREAM_CHANNEL);
-                break;
         }
         return userInfoDao.updateUserInfo(userInfo);
     }
@@ -82,8 +58,8 @@ return userInfoDao.deleteUserByUsername(userName);
     }
 
     @Override
-    public List<UserInfo> queryUserByJurisdiction(int jurisdiction) {
-        return userInfoDao.queryUserByJurisdiction(jurisdiction);
+    public List<URole> queryRoleByUserId(long id) {
+        return userInfoDao.queryRoleByUserId(id);
     }
 
     @Override
@@ -107,10 +83,6 @@ return userInfoDao.deleteUserByUsername(userName);
         if(userInfo == null){
             return null;
         }
-        Integer userJuri = userInfo.getUserJurisdiction();
-        if(userJuri == Constants.JURI_SUPERADMIN){
-            pagingQuery.setOperator("");
-        }
         int offset = (int) (pagingQuery.getTotalRecords() - (pagingQuery.getPageSize()*pagingQuery.getPageIndex()));
         if(offset<0){
             pagingQuery.setPageSize(pagingQuery.getPageSize()+offset);
@@ -127,10 +99,6 @@ return userInfoDao.deleteUserByUsername(userName);
         UserInfo userInfo = queryUserByUsername(userName);
         if(userInfo == null){
             return 0;
-        }
-        Integer userJuri = userInfo.getUserJurisdiction();
-        if(userJuri == Constants.JURI_SUPERADMIN){
-            userName = "";
         }
         return userInfoDao.queryAllCount(userName);
     }

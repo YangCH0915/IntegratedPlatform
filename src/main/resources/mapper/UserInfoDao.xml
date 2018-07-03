@@ -7,8 +7,6 @@
         insert into user_info(user_name,
             password,
             ua_name,
-            user_jurisdiction,
-            html,
             founder,
             create_time,
             renewing,
@@ -18,7 +16,7 @@
             state,
             remarks)
         values
-            (#{user.userName},#{user.password},#{user.uaName},#{user.userJurisdiction},#{user.html},
+            (#{user.userName},#{user.password},#{user.uaName},
             #{user.founder},#{user.createTime},#{user.renewing},#{user.updateTime},
             #{user.callbackUrl},#{user.notifyUrl},#{user.state},#{user.remarks})
     </insert>
@@ -28,7 +26,6 @@
         user_name=#{user.userName},
         password=#{user.password},
         ua_name=#{user.uaName},
-        user_jurisdiction=#{user.userJurisdiction},
         renewing=#{user.renewing},
         update_time=#{user.updateTime},
         callback_url=#{user.callbackUrl},
@@ -50,18 +47,39 @@
         select * from user_info
     </select>
 
-    <select id="queryUserByJurisdiction" resultType="com.xinruiyun.platform.entity.user.UserInfo">
-        select * from user_info where user_jurisdiction=#{jurisdiction}
+    <!-- 用户权限分配的分页查询
+    <select id="findUserAndRole" resultType="com.sojson.permission.bo.UserRoleAllocationBo">
+        select u.id,u.nickname,u.email,u.create_time,u.last_login_time,u.status ,group_concat(ur.name) roleNames,group_concat(ur.id)roleIds from
+        user_info u
+        left join u_user_role uur on uur.uid = u.id
+        left join u_role ur on ur.id = uur.rid
+        <where>
+            <if test="findContent != null and findContent !='' " >
+                and (
+                LOWER(u.nickname) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")) or
+                LOWER(u.email) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%"))
+                )
+            </if>
+        </where>
+        group by u.id
     </select>
-    
+-->
+    <select id="queryRoleByUserId" resultType="com.xinruiyun.platform.dto.URole">
+             select ur.id,ur.name,ur.type,uu.id userId from role ur
+		left join u_user_role uur on uur.rid = ur.id
+		left join (select id from user_info where id =#{id,jdbcType=BIGINT}) uu on uu.id = uur.uid
+		where uu.id = uur.uid
+		group by ur.id
+    </select>
+
     <select id="queryUserById" resultType="com.xinruiyun.platform.entity.user.UserInfo">
         select * from user_info where id=#{id}
     </select>
-    
+
     <select id="queryUserByUsername" resultType="com.xinruiyun.platform.entity.user.UserInfo">
         select * from user_info where user_name=#{userName}
     </select>
-    
+
     <update id="updatePassword">
          update user_info set password=#{password} where user_name=#{userName}
     </update>
@@ -91,7 +109,7 @@
     </select>
 
     <select id="queryAllCount" resultType="Long">
-        select count(*) from user_info
+        select count(id) from user_info
         <if test="founder != null and founder != ''">
             where founder=#{founder}
         </if>

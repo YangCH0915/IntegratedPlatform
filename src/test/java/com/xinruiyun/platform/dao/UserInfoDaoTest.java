@@ -7,6 +7,7 @@ import com.xinruiyun.platform.entity.user.UserInfo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 public class UserInfoDaoTest extends BaseTest{
@@ -16,6 +17,14 @@ public class UserInfoDaoTest extends BaseTest{
 
     @Test
     public void addUserInfo() {
+        for(int i=0;i<10;i++){
+            UserInfo userInfo = new UserInfo();
+            userInfo.setCreateTime(new Date());
+            userInfo.setUserName("test"+i);
+            userInfo.setPassword("1001230"+i);
+            userInfo.setUaName("测试"+i);
+            userInfoDao.addUserInfo(userInfo);
+        }
     }
 
     @Test

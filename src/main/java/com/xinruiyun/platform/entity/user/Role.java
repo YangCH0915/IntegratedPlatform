@@ -8,7 +8,7 @@ public class Role implements Serializable {
 
     private static final long serialVersionUID = 1001L;
 
-    private Long id;
+    private int id;
     /**
      * 角色名称
      * */
@@ -25,11 +25,11 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,5 +55,15 @@ public class Role implements Serializable {
 
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", permissions=" + permissions +
+                '}';
     }
 }

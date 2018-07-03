@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinruiyun.platform.dao.user.RoleDao">
+    <resultMap id="role" type="com.xinruiyun.platform.entity.user.Role">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type" />
+    </resultMap>
+
+    <resultMap id="permission" type="com.xinruiyun.platform.entity.user.Permission">
+        <id column="id" property="id"/>
+        <result column="url" property="url" />
+        <result column="name" property="name" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, type
+     </sql>
+
+    <sql id="limit_sql">
+        <if test="page_sql != null and page_sql != ''">
+            ${page_sql}
+        </if>
+    </sql>
+
+    <sql id="where_all">
+        <where>
+            <if test="findContent != null and findContent !='' ">
+                and (
+                LOWER(name) like CONCAT("%",#{findContent},"%") or
+                LOWER(type) like CONCAT("%",#{findContent},"%")
+                )
+            </if>
+        </where>
+    </sql>
+
+    <select id="findCount" resultMap="role" >
+        select count(id) from  role
+        <include refid="where_all" />
+    </select>
+
+    <!-- 普通的分页查询 -->
+    <select id="queryAllRole" resultMap="role">
+        select
+        <include refid="Base_Column_List"/>
+        from role
+        <include refid="where_all"/>
+        <include refid="limit_sql"/>
+    </select>
+
+    <select id="queryRoleById" resultMap="role">
+        select
+        <include refid="Base_Column_List"/>
+        from role
+        where id = #{id}
+    </select>
+
+    <delete id="deleteRoleById">
+    delete from role where id = #{id}
+  </delete>
+
+    <insert id="addRole" useGeneratedKeys="true" keyProperty="id">
+    insert into role (id, name, type
+      )
+    values (#{role.id}, #{role.name}, #{role.type}
+      )
+  </insert>
+
+    <update id="updateRole">
+        update role
+        <set>
+            <if test="name != null">
+                name = #{role.name},
+            </if>
+            <if test="type != null">
+                type = #{role.type},
+            </if>
+        </set>
+        where id = #{role.id}
+    </update>
+
+</mapper>

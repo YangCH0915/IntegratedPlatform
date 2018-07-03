@@ -3,7 +3,7 @@ package com.xinruiyun.platform.entity.user;
 public class Permission {
     private static final long serialVersionUID = 1002L;
 
-    private Long id;
+    private int id;
     /**
      *  操作的url
      */
@@ -13,11 +13,11 @@ public class Permission {
      */
     private String name;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

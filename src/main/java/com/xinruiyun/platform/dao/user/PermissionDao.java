@@ -1,6 +1,6 @@
 package com.xinruiyun.platform.dao.user;
 
-import com.xinruiyun.platform.dto.PagingQuery;
+import com.xinruiyun.platform.dto.UPermission;
 import com.xinruiyun.platform.entity.user.Permission;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,17 +12,11 @@ public interface PermissionDao {
 
     int updatePermission(@Param("p") Permission permission);
 
-    int deletePermissionbyId(int id);
-
-    int deletePermissionByName(String name);
+    int deletePermissionById(int id);
 
     List<Permission> queryAllPermission();
 
     Permission queryPermissionById(int id);
 
-    Permission queryPermissionByName(String name);
-
-    List<Permission> queryPermissionByPage(@Param("pq") PagingQuery pagingQuery);
-
-    long queryAllCount();
+    List<UPermission> queryPermissionByRoleId(int id);
 }

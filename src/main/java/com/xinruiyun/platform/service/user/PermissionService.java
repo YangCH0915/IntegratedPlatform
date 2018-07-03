@@ -1,6 +1,6 @@
 package com.xinruiyun.platform.service.user;
 
-import com.xinruiyun.platform.dto.PagingQuery;
+import com.xinruiyun.platform.dto.UPermission;
 import com.xinruiyun.platform.entity.user.Permission;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,15 +14,9 @@ public interface PermissionService {
 
     int deletePermissionById(int id);
 
-    int deletePermissionByName(String name);
-
     List<Permission> queryAllPermission();
 
     Permission queryPermissionById(int id);
 
-    Permission queryPermissionByName(String name);
-
-    List<Permission> queryPermissionByPage(@Param("pq") PagingQuery pagingQuery);
-
-    long queryAllCount();
+    List<UPermission> queryPermissionByRoleId(int id);
 }

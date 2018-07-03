@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinruiyun.platform.dao.user.PermissionDao" >
+  <resultMap id="permission" type="com.xinruiyun.platform.entity.user.Permission" >
+    <id column="id" property="id" />
+    <result column="url" property="url"/>
+    <result column="name" property="name" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, url, name
+  </sql>
+  
+  <sql id="limit_sql">
+  	   <if test="page_sql != null and page_sql != ''">
+      	${page_sql}
+      </if>
+  </sql>
+  
+  <sql id="where_all">
+  	<where>
+  	<if test="findContent != null and findContent !='' " >
+        and (
+        LOWER(name) like CONCAT("%",#{findContent,jdbcType=VARCHAR},"%") or
+        LOWER(url) like CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")
+        )
+      </if>
+      </where>
+  </sql>
+
+  <select id="queryAllPermission" resultMap="permission" >
+  	 select 
+    <include refid="Base_Column_List" />
+    from u_permission 
+    <include refid="where_all"/>
+    <include refid="limit_sql" />
+  </select>
+
+  <select id="findCount" resultMap="permission" >
+ 	 select count(id) from  u_permission
+  	<include refid="where_all" />
+  </select>
+
+  <!-- 根据角色获取权限，marker:0,没有权限，marker：非0(和up.id)一致表示有权限。 
+  	com.sojson.permission.bo.UPermissionBo中的这个方法是校验权限
+  	public boolean isCheck(){
+		return StringUtils.equals(roleId,marker);
+	}
+  -->
+  <select id="queryPermissionByRoleId" resultType="com.xinruiyun.platform.dto.UPermission">
+		select up.id,ur.id roleId,up.name,up.url,ifnull(ur.id,0)marker from permission up
+		left join u_role_permission urp on urp.pid = up.id
+		left join (select id from role where id = #{id}) ur on ur.id = urp.rid
+		where ur.id = urp.rid
+		group by up.id
+  </select>
+
+  <!-- 根据用ID查询permission -->
+  <select id="queryPermissionById">
+  		select p.url from permission p , u_role_permission rp, u_user_role ur
+		where uid =#{id,jdbcType=BIGINT} and p.id = rp.pid and rp.rid = ur.rid
+  </select>
+
+  <delete id="deletePermissionById" parameterType="java.lang.Long" >
+    delete from permission
+    where id = #{id}
+  </delete>
+
+  <insert id="addPermission" useGeneratedKeys="true" keyProperty="id">
+    insert into permission (id, url, name)
+    values (#{p.id}, #{p.url}, #{p.name})
+  </insert>
+
+  <update id="updatePermission">
+    update permission
+    set url = #{url},
+      name = #{name}
+    where id = #{id}
+  </update>
+</mapper>
