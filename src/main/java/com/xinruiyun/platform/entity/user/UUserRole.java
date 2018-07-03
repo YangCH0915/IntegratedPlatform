@@ -15,14 +15,16 @@ public class UUserRole  implements Serializable{
     /**
      * 关联角色ID
      */
-    private Long rid;
+    private int rid;
 
-    public UUserRole(Long uid,Long rid) {
+    public UUserRole(Long uid,int rid) {
     	this.uid = uid;
     	this.rid = rid;
 	}
+
     public UUserRole() {
     }
+
     public Long getUid() {
         return uid;
     }
@@ -31,11 +33,11 @@ public class UUserRole  implements Serializable{
         this.uid = uid;
     }
 
-    public Long getRid() {
+    public int getRid() {
         return rid;
     }
 
-    public void setRid(Long rid) {
+    public void setRid(int rid) {
         this.rid = rid;
     }
 }

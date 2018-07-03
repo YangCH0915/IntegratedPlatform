@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinruiyun.platform.dao.user.UUserRoleDao" >
+  <resultMap id="UserRole" type="com.xinruiyun.platform.entity.user.UUserRole" >
+    <result column="uid" property="uid"/>
+    <result column="rid" property="rid"/>
+  </resultMap>
+
+  <insert id="insert">
+    insert into u_user_role (uid, rid)
+    values (#{ur.uid}, #{ur.rid})
+  </insert>
+
+   <!-- 根据用户ID删除-->
+  <delete id="deleteByUserId">
+  	delete from u_user_role where uid =  #{id}
+  </delete>
+
+  <!-- 根据用户roleId查询用户ID -->
+  <select id="findUserIdByRoleId" resultType="long">
+  	select uid from u_user_role where rid =  #{id}
+  </select>
+  
+  <insert id="insertSelective" parameterType="com.xinruiyun.platform.entity.user.UUserRole" >
+    insert into u_user_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="rid != null" >
+        rid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>
