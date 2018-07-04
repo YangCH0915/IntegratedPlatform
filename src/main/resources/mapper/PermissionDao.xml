@@ -58,7 +58,7 @@
   <!-- 根据用ID查询permission -->
   <select id="queryPermissionById">
   		select p.url from permission p , u_role_permission rp, u_user_role ur
-		where uid =#{id,jdbcType=BIGINT} and p.id = rp.pid and rp.rid = ur.rid
+		where uid =#{id} and p.id = rp.pid and rp.rid = ur.rid
   </select>
 
   <delete id="deletePermissionById" parameterType="java.lang.Long" >

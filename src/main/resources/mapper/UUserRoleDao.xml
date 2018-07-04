@@ -33,10 +33,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
-        #{uid,jdbcType=BIGINT},
+        #{uid},
       </if>
       <if test="rid != null" >
-        #{rid,jdbcType=BIGINT},
+        #{rid},
       </if>
     </trim>
   </insert>

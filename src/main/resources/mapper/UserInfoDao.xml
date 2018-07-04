@@ -67,7 +67,7 @@
     <select id="queryRoleByUserId" resultType="com.xinruiyun.platform.dto.URole">
              select ur.id,ur.name,ur.type,uu.id userId from role ur
 		left join u_user_role uur on uur.rid = ur.id
-		left join (select id from user_info where id =#{id,jdbcType=BIGINT}) uu on uu.id = uur.uid
+		left join (select id from user_info where id =#{id}) uu on uu.id = uur.uid
 		where uu.id = uur.uid
 		group by ur.id
     </select>
