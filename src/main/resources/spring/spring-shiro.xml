@@ -37,7 +37,6 @@
         <property name="filterChainDefinitions">
             <value>
                 /login = authc
-                /logout = logout
             </value>
         </property>
     </bean>

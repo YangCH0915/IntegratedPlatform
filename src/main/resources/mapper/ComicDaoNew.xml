@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinruiyun.platform.dao.comic.update.ComicDaoNew">
+
+    <sql id="comic">
+            master_comic_id,title,intro,cover,page_count,volume_count,origin_url,origin_aisles,
+            origin_domain,origin_id,origin_cover,origin_title,origin_intro,create_time,open,
+            isend,in_search,read_add_rate_min,read_add_rate_max,update_time,last_volpub_time,
+            level
+    </sql>
+
+    <insert id="insertComic">
+        insert into comic_n(
+           <include refid="comic"></include>
+            )
+        values
+            (#{c.masterComicId},#{c.title},#{c.intero},#{c.cover},#{c.pageCount},#{c.volumeCount},#{c.originUrl},#{c.originAisles},
+            #{c.originDomain},#{c.originId},#{c.originCover},#{c.originTitle},#{c.originIntro},#{c.createTime}, #{c.open},
+            #{c.isend},#{c.inSearch},#{c.readAddRateMin},#{c.readAddRateMax},
+            #{c.updateTime},#{c.lastVolpubTime},#{c.level})
+    </insert>
+
+    <select id="findAll" resultType="com.xinruiyun.platform.entity.comic.Comic">
+        select * from comic_n
+    </select>
+
+    <select id="findComicById" resultType="com.xinruiyun.platform.entity.comic.Comic">
+        select * from comic_n where master_comic_id =#{id}
+    </select>
+
+</mapper>

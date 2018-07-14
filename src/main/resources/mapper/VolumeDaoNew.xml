@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinruiyun.platform.dao.comic.update.VolumeDaoNew">
+
+    <sql id="volume">
+            master_volume_id,comic_id,title,cover,page_count,origin_title,origin_id,origin_cover,
+            origin_url,order_index,order_no,free,gold,open,create_time,update_time
+    </sql>
+
+    <insert id="insertVolume">
+        insert into volume_n(
+           <include refid="volume"></include>
+            )
+        values
+            (#{v.masterVolumeId},#{v.comicId},#{v.title},#{v.cover},#{v.pageCount},#{v.originTitle},#{v.originId},
+            #{v.originCover},#{v.originUrl},#{v.orderIndex},#{v.orderNo},#{v.free},#{v.gold},#{v.open}, #{v.createTime},
+            #{v.updateTime})
+    </insert>
+
+    <select id="findVolumeByComicId" resultType="com.xinruiyun.platform.entity.comic.Volume">
+        select * from volume_n where comic_id =#{id}
+    </select>
+
+    <select id="findVolumeByVolumeId" resultType="com.xinruiyun.platform.entity.comic.Volume">
+        select * from volume_n where comic_id =#{comicId} and master_volume_id = #{volumeId}
+    </select>
+
+</mapper>

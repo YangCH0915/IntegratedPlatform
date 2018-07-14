@@ -25,8 +25,8 @@ public class OkHttpManager {
                 .retryOnConnectionFailure(true)
                 .addInterceptor(interceptor)
                 .connectionPool(new ConnectionPool())
-                .connectTimeout(3000, TimeUnit.MILLISECONDS)
-                .readTimeout(10000, TimeUnit.MILLISECONDS)
+                .connectTimeout(30000, TimeUnit.MILLISECONDS)
+                .readTimeout(30000, TimeUnit.MILLISECONDS)
                 .build();
     }
 
@@ -195,13 +195,15 @@ public class OkHttpManager {
      * @param fileDir
      * @param fileName
      */
-    public void downFile(String url, final String fileDir, final String fileName) {
+    public void downFile(String url, final String fileDir, final String fileName) throws IOException {
         Request request = new Request.Builder().url(url).build();
         Call call = mClient.newCall(request);
+        Response response = call.execute();
+
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                System.out.println("下载异常："+e.toString());
             }
 
             @Override
@@ -230,5 +232,33 @@ public class OkHttpManager {
                 }
             }
         });
+    }
+
+    public void syncDownFile(String url, final String fileDir, final String fileName) throws IOException {
+        Request request = new Request.Builder().url(url).build();
+        Call call = mClient.newCall(request);
+        Response response = call.execute();
+        InputStream is = null;
+        byte[] buf = new byte[2048];
+        int len = 0;
+        FileOutputStream fos = null;
+        try {
+//            len = response.body().charStream().read();
+            File file = new File(fileDir);
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            file = new File(file.getAbsolutePath(), fileName);
+            fos = new FileOutputStream(file);
+            while ((len = response.body().charStream().read()) != -1) {
+                fos.write(buf, 0, len);
+            }
+            fos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (is != null) is.close();
+            if (fos != null) fos.close();
+        }
     }
 }
