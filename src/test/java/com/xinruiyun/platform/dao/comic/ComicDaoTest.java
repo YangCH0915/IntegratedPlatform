@@ -24,6 +24,9 @@ public class ComicDaoTest extends BaseTest {
     @Autowired
     private ComicDaoNew comicDaoNew;
 
+    @Autowired
+    private PageDao pageDao;
+
     @Test
     public void findAll() {
         List<Comic> all = comicDao.findAll();
@@ -105,12 +108,12 @@ public class ComicDaoTest extends BaseTest {
 
     @Test
     public void downloadUpdate() {
-        int comicId = 6356;
+        int comicId = 6349;
         List<Volume> volume = volumeDao.findVolumeByComicId(comicId);
-        String savePath = "E:\\漫画资源\\更新\\姐姐";
+        String savePath = "E:\\漫画资源\\更新0716\\邻家少女";
         for (Volume v : volume) {
-            if (v.getId() > 113194) {
-                List<Page> pages = pageDaoNew.findPageByComicIdAndVolumeId(comicId, v.getId());
+            if (v.getId() > 113168) {
+                List<Page> pages = pageDao.findPageByComicIdAndVolumeId(comicId, v.getId());
                 for (Page p : pages) {
                     String pageUrl = p.getPageUrl();
                     writeStringToFile(pageUrl, savePath, v.getTitle() + ".txt");

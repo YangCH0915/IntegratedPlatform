@@ -21,6 +21,28 @@ public class SignUtils {
         String signRecieve = DigestUtils.md5Hex(signStr);
         return signRecieve;
     }
+
+    public static String md5(Map<String,String> params,String key){
+        Map<String, String> stringMap = SignUtils.paraFilter(params);
+        StringBuilder buf = new StringBuilder((stringMap.size() +1) * 10);
+        SignUtils.buildPayParams(buf,stringMap,false);
+        String preStr = buf.toString();
+        String signStr = preStr+"&key="+key;
+        String sign = DigestUtils.md5Hex(signStr);
+        return sign.toUpperCase();
+    }
+
+    public static boolean checkMd5(Map<String,String> params,String key){
+        String sign = params.get("sign");
+        Map<String, String> stringMap = SignUtils.paraFilter(params);
+        StringBuilder buf = new StringBuilder((stringMap.size() +1) * 10);
+        SignUtils.buildPayParams(buf,stringMap,false);
+        String preStr = buf.toString();
+        String signStr = preStr+"&key="+key;
+        String s = DigestUtils.md5Hex(signStr).toUpperCase();
+        return s.equalsIgnoreCase(sign.toUpperCase());
+    }
+
     /**
      * 过滤为空和sign参数
      * @author  
